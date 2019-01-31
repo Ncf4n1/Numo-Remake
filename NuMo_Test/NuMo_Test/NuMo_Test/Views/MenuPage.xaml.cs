@@ -21,8 +21,8 @@ namespace NuMo_Test.Views
                 new Models.MenuItem {Id = MenuItemType.Home, Title="Home" },
                 new Models.MenuItem {Id = MenuItemType.CreateRecipe, Title="Create Recipe" },
                 new Models.MenuItem {Id = MenuItemType.CreateFood, Title="Create Food" },
-                new Models.MenuItem {Id = MenuItemType.ItemDetail, Title="Item Detail"},
-                new Models.MenuItem {Id = MenuItemType.Settings, Title="Settings"}
+                new Models.MenuItem {Id = MenuItemType.Settings, Title="Settings"},
+                new Models.MenuItem {Id = MenuItemType.AddFood, Title="Add Food" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

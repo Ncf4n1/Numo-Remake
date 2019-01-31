@@ -556,11 +556,10 @@
   },
   "libraries": {
     "Xamarin.Forms/3.4.0.1029999": {
-      "sha512": "et3gAEFuO8E+VgZU0IQnMhgk9m8mYHN6q4Cc2mKhqPV7EA7qG/aYZKojP3/dXthruoi0T18PW1+BgEW2l40D5w==",
+      "sha512": "qupCyyDo1x3c0BfroaTOhkc6wjeBXQnRLkUhvlgfVmZAcBjSEOaPRsa5/HWShtnkgqnySrkwzYEu3N0dG0pn7Q==",
       "type": "package",
       "path": "xamarin.forms/3.4.0.1029999",
       "files": [
-        ".nupkg.metadata",
         ".signature.p7s",
         "build/Xamarin.Forms.DefaultItems.props",
         "build/Xamarin.Forms.DefaultItems.targets",
@@ -716,34 +715,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\llvin\\.nuget\\packages\\": {}
+    "/Users/Ethan/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\NuMo_Test.iOS.csproj",
+      "projectUniqueName": "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test.iOS/NuMo_Test.iOS.csproj",
       "projectName": "NuMo_Test.iOS",
-      "projectPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\NuMo_Test.iOS.csproj",
-      "packagesPath": "C:\\Users\\llvin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\obj\\",
+      "projectPath": "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test.iOS/NuMo_Test.iOS.csproj",
+      "packagesPath": "/Users/Ethan/.nuget/packages/",
+      "outputPath": "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test.iOS/obj",
       "projectStyle": "PackageReference",
-      "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\llvin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/Ethan/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "xamarinios10"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj": {
-              "projectPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj"
+            "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test/NuMo_Test.csproj": {
+              "projectPath": "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test/NuMo_Test.csproj"
             }
           }
         }

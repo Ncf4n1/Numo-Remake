@@ -35,11 +35,11 @@ namespace NuMo_Test.Views
                     case (int)MenuItemType.CreateFood:
                         MenuPages.Add(id, new NavigationPage(new CreateFoodPage()));
                         break;
-                    case (int)MenuItemType.ItemDetail:
-                        MenuPages.Add(id, new NavigationPage(new ItemDetailPage()));
-                        break;
                     case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
+                        break;
+                    case (int)MenuItemType.AddFood:
+                        MenuPages.Add(id, new NavigationPage(new AddFoodPage()));
                         break;
                 }
             }

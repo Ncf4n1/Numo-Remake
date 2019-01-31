@@ -51,8 +51,6 @@
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -66,8 +64,6 @@
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "build/netstandard2.0/NETStandard.Library.targets",
@@ -191,11 +187,10 @@
       ]
     },
     "Xamarin.Forms/3.4.0.1029999": {
-      "sha512": "et3gAEFuO8E+VgZU0IQnMhgk9m8mYHN6q4Cc2mKhqPV7EA7qG/aYZKojP3/dXthruoi0T18PW1+BgEW2l40D5w==",
+      "sha512": "qupCyyDo1x3c0BfroaTOhkc6wjeBXQnRLkUhvlgfVmZAcBjSEOaPRsa5/HWShtnkgqnySrkwzYEu3N0dG0pn7Q==",
       "type": "package",
       "path": "xamarin.forms/3.4.0.1029999",
       "files": [
-        ".nupkg.metadata",
         ".signature.p7s",
         "build/Xamarin.Forms.DefaultItems.props",
         "build/Xamarin.Forms.DefaultItems.targets",
@@ -346,30 +341,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\llvin\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/Ethan/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj",
+      "projectUniqueName": "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test/NuMo_Test.csproj",
       "projectName": "NuMo_Test",
-      "projectPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj",
-      "packagesPath": "C:\\Users\\llvin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\obj\\",
+      "projectPath": "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test/NuMo_Test.csproj",
+      "packagesPath": "/Users/Ethan/.nuget/packages/",
+      "outputPath": "/Users/Ethan/Documents/softwareFactory/NuMo-Remake/NuMo_Test/NuMo_Test/NuMo_Test/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\llvin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/Ethan/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
