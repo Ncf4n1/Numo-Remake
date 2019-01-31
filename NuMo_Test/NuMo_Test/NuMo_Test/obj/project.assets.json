@@ -47,11 +47,10 @@
   },
   "libraries": {
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
-        ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -62,11 +61,10 @@
       ]
     },
     "NETStandard.Library/2.0.3": {
-      "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "sha512": "548M6mnBSJWxsIlkQHfbzoYxpiYFXZZSL00p4GHYv8PkiqFBnnT68mW5mGEsA/ch9fDO9GkPgkFQpWiXZN7mAQ==",
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
-        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -191,11 +189,10 @@
       ]
     },
     "Xamarin.Forms/3.4.0.1029999": {
-      "sha512": "et3gAEFuO8E+VgZU0IQnMhgk9m8mYHN6q4Cc2mKhqPV7EA7qG/aYZKojP3/dXthruoi0T18PW1+BgEW2l40D5w==",
+      "sha512": "qupCyyDo1x3c0BfroaTOhkc6wjeBXQnRLkUhvlgfVmZAcBjSEOaPRsa5/HWShtnkgqnySrkwzYEu3N0dG0pn7Q==",
       "type": "package",
       "path": "xamarin.forms/3.4.0.1029999",
       "files": [
-        ".nupkg.metadata",
         ".signature.p7s",
         "build/Xamarin.Forms.DefaultItems.props",
         "build/Xamarin.Forms.DefaultItems.targets",
@@ -346,23 +343,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\llvin\\.nuget\\packages\\": {},
+    "C:\\Users\\nolla\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj",
+      "projectUniqueName": "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj",
       "projectName": "NuMo_Test",
-      "projectPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj",
-      "packagesPath": "C:\\Users\\llvin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\obj\\",
+      "projectPath": "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj",
+      "packagesPath": "C:\\Users\\nolla\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\llvin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nolla\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

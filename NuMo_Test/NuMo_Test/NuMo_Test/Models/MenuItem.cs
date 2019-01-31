@@ -8,7 +8,11 @@ namespace NuMo_Test.Models
     {
         Home,
         CreateRecipe,
-        CreateFood
+        CreateFood,
+        Visualize,
+        DRI,
+        AddFood,
+        Settings
     }
     public class MenuItem
     {
