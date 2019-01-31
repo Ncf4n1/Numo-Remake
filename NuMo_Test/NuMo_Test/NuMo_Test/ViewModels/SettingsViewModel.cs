@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Windows.Input;
 
-using NuMo_Test.Models;
+using Xamarin.Forms;
 
 namespace NuMo_Test.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public SettingsViewModel(Item item = null)
+        public SettingsViewModel()
         {
             Title = "Settings";
-            Item = item;
         }
+
+        public ICommand OpenWebCommand { get; }
     }
 }

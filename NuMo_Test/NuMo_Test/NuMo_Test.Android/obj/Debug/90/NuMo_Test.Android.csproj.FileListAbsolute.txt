@@ -103,4 +103,6 @@ C:\Users\llvin\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.Android\obj\Deb
 C:\Users\llvin\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.Android\obj\Debug\90\android\assets\Xamarin.Forms.Core.pdb
 C:\Users\llvin\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.Android\obj\Debug\90\android\assets\Xamarin.Forms.Platform.Android.pdb
 C:\Users\llvin\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.Android\obj\Debug\90\android\assets\Xamarin.Forms.Xaml.pdb
+C:\Users\llvin\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\bin\Debug\netstandard2.0\NuMo_Test.dll
+C:\Users\llvin\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.Android\bin\Debug\NuMo_Test.dll.mdb
 C:\Users\llvin\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.Android\obj\Debug\90\linksrc\NuMo_Test.dll.mdb
