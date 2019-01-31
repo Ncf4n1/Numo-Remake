@@ -9,7 +9,8 @@ namespace NuMo_Test.ViewModels
         public Item Item { get; set; }
         public ItemDetailViewModel(Item item = null)
         {
-            Title = item?.Text;
+            Title = "Item Detail Page";
+            //Title = item?.Text;
             Item = item;
         }
     }
