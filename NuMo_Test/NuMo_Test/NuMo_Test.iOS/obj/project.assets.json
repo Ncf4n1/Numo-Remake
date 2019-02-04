@@ -752,10 +752,11 @@
   },
   "libraries": {
     "sqlite-net-pcl/1.5.231": {
-      "sha512": "Sy+K+Wm2RZ+4b1uLHsaXvfR92Or71XxPXa2Id6msSOVkZKh+c+PUk/HQOAgxyhm3lhvysL0mK6Gd6mI69NJ9AA==",
+      "sha512": "B9jScvqkishSMkpa9Mc4Q85LTHxRTzcUXZx9EQqgrvdz7MFEDHfpiPcKdjy1qXHdmHttEXfY4h6gu4FlgWP2Sw==",
       "type": "package",
       "path": "sqlite-net-pcl/1.5.231",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard1.1/SQLite-net.deps.json",
         "lib/netstandard1.1/SQLite-net.dll",
@@ -767,10 +768,11 @@
       ]
     },
     "SQLitePCLRaw.bundle_green/1.1.11": {
-      "sha512": "HOD1/Jg9VZtrOyPUCD9reQOXHq4r+fNe24qw5nghuiUcKch+9jePeRpt6MqGGUFhg2KW89KvE/RFlhpbfF8pKA==",
+      "sha512": "Hqp8IF/RLjbypkLm+t+1RqAX8EKuWEkj7wkLXplfENQoPnE127cvTmaDvaQKtt7a5QsD/HNjFDr1z5f9q2wdPg==",
       "type": "package",
       "path": "sqlitepclraw.bundle_green/1.1.11",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "build/wp8/SQLitePCLRaw.bundle_green.targets",
         "build/wp80/arm/SQLitePCLRaw.batteries_green.dll",
@@ -813,10 +815,11 @@
       ]
     },
     "SQLitePCLRaw.core/1.1.11": {
-      "sha512": "bWiOso10I1vDuc5rbzT69LQT0+oXfYnoqx8vKJ8zim/CJ4ytSd20QNTE/FE0dvWEgXGnvDp7gGJFu6PeWnhx9g==",
+      "sha512": "QT17CyQAQIbTCu6pW5+uVA8BXqRzquiDI1tr5Un6c1YZcQydPmGPuYYng9xMs2UHUDYHbTu+JDkp55WR+qo9bQ==",
       "type": "package",
       "path": "sqlitepclraw.core/1.1.11",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/MonoAndroid/SQLitePCLRaw.core.dll",
         "lib/Xamarin.Mac20/SQLitePCLRaw.core.dll",
@@ -838,10 +841,11 @@
       ]
     },
     "SQLitePCLRaw.provider.sqlite3.ios_unified/1.1.11": {
-      "sha512": "pgdrdeXCK6l5yLrRK9JjU0a6rVNJN64IKICKtDRI4zXc2Vv/4aBZNJfoivv/AFHaq/KJKR/1vAHI6mJTbeK8GA==",
+      "sha512": "hWk/vgFthsTedjorVFNErd5xk0x0UtlYr/ndmDUYhAcA9Y9g0IJXBMn1Z2QYsLMlvE6Qj5yVvjfkUOARhXezQw==",
       "type": "package",
       "path": "sqlitepclraw.provider.sqlite3.ios_unified/1.1.11",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/Xamarin.iOS10/SQLitePCLRaw.provider.sqlite3.dll",
         "sqlitepclraw.provider.sqlite3.ios_unified.1.1.11.nupkg.sha512",
@@ -849,10 +853,11 @@
       ]
     },
     "Xamarin.Forms/3.4.0.1029999": {
-      "sha512": "qupCyyDo1x3c0BfroaTOhkc6wjeBXQnRLkUhvlgfVmZAcBjSEOaPRsa5/HWShtnkgqnySrkwzYEu3N0dG0pn7Q==",
+      "sha512": "et3gAEFuO8E+VgZU0IQnMhgk9m8mYHN6q4Cc2mKhqPV7EA7qG/aYZKojP3/dXthruoi0T18PW1+BgEW2l40D5w==",
       "type": "package",
       "path": "xamarin.forms/3.4.0.1029999",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "build/Xamarin.Forms.DefaultItems.props",
         "build/Xamarin.Forms.DefaultItems.targets",
@@ -1008,20 +1013,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nolla\\.nuget\\packages\\": {}
+    "C:\\Users\\llvin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\NuMo_Test.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\NuMo_Test.iOS.csproj",
       "projectName": "NuMo_Test.iOS",
-      "projectPath": "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\NuMo_Test.iOS.csproj",
-      "packagesPath": "C:\\Users\\nolla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\obj\\",
+      "projectPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\NuMo_Test.iOS.csproj",
+      "packagesPath": "C:\\Users\\llvin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\nolla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\llvin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1034,8 +1039,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj": {
-              "projectPath": "C:\\Users\\nolla\\Desktop\\Numo\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj"
+            "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj": {
+              "projectPath": "C:\\Users\\llvin\\Desktop\\Numo-Remake\\NuMo_Test\\NuMo_Test\\NuMo_Test\\NuMo_Test.csproj"
             }
           }
         }
