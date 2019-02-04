@@ -17,4 +17,9 @@
             <Color x:Key="LightTextColor">#999999</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout x:Name = "mainStack">
+            <ListView x:Name="searchList" ItemTapped="itemTapped"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

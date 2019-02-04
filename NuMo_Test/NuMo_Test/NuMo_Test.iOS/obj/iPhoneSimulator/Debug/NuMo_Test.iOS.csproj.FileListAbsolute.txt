@@ -1,5 +1,10 @@
 C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\NuMo_Test.iOS.exe
 C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\NuMo_Test.iOS.pdb
+C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\SQLite-net.dll
+C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\SQLitePCLRaw.batteries_green.dll
+C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\SQLitePCLRaw.batteries_v2.dll
+C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\SQLitePCLRaw.core.dll
+C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\SQLitePCLRaw.provider.sqlite3.dll
 C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\Xamarin.Forms.Core.dll
 C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\Xamarin.Forms.Core.pdb
 C:\Users\nolla\Desktop\Numo\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test.iOS\bin\iPhoneSimulator\Debug\Xamarin.Forms.Platform.dll
