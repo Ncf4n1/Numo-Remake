@@ -22,7 +22,7 @@
             <ListView x:Name="searchList" ItemTapped="itemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding String}" TextColor="Black"/>  <!-- Binding Title might work -->
+                        <TextCell Text="{Binding name}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

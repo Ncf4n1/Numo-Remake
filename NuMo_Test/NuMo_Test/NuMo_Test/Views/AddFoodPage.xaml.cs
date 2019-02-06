@@ -30,12 +30,11 @@ namespace NuMo_Test.Views
             //Get search results for every key entry into the search bar and display them
             searchbar.TextChanged += (sender, e) =>
             {
-                String searchItem = e.NewTextValue; ;
+                String searchItem = e.NewTextValue;
                 var db = DataAccessor.getDataAccessor();
                 var searchResults = db.searchName(searchItem);
                 searchList.ItemsSource = searchResults;
             };
-
 
             mainStack.Children.Insert(0, searchbar);
         }

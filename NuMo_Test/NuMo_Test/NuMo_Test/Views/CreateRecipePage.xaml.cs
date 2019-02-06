@@ -12,5 +12,14 @@ namespace NuMo_Test.Views
         {
             InitializeComponent();
         }
+
+        async void SaveRecipe(object sender, EventArgs e)
+        {
+
+        }
+        async void AddIngredient(object sender, EventArgs e)
+        {
+
+        }
     }
 }
