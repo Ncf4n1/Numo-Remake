@@ -29,6 +29,9 @@ namespace NuMo_Test.Views
                     case (int)MenuItemType.Home:
                         MenuPages.Add(id, new NavigationPage(new HomePage()));
                         break;
+                    case (int)MenuItemType.AddFood:
+                        MenuPages.Add(id, new NavigationPage(new AddFoodPage()));
+                        break;
                     case (int)MenuItemType.CreateRecipe:
                         MenuPages.Add(id, new NavigationPage(new CreateRecipePage()));
                         break;
@@ -40,9 +43,6 @@ namespace NuMo_Test.Views
                         break;
                     case (int)MenuItemType.DRI:
                         MenuPages.Add(id, new NavigationPage(new DRIPage()));
-                        break;
-                    case (int)MenuItemType.AddFood:
-                        MenuPages.Add(id, new NavigationPage(new AddFoodPage()));
                         break;
                     case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));

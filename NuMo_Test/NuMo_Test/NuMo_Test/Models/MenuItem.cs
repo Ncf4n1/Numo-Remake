@@ -7,11 +7,11 @@ namespace NuMo_Test.Models
     public enum MenuItemType
     {
         Home,
+        AddFood,
         CreateRecipe,
         CreateFood,
         Visualize,
         DRI,
-        AddFood,
         Settings
     }
     public class MenuItem
