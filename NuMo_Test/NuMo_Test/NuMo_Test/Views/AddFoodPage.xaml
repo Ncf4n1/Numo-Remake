@@ -19,7 +19,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout x:Name = "mainStack">
-            <ListView x:Name="searchList" ItemTapped="itemTapped">
+            <ListView x:Name="searchList" ItemTapped="ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding name}" />

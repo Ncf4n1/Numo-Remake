@@ -49,7 +49,7 @@ namespace NuMo_Test.Views
         }
 
         //Opens a new window when a search item is clicked.
-        public async void itemTapped(object sender, ItemTappedEventArgs e)
+        public async void ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
             {

@@ -115,7 +115,7 @@ namespace NuMo_Test.Views
                     Text = "Nutrient",
                     WidthRequest = 150,
                     HorizontalOptions = LayoutOptions.StartAndExpand,
-                    TextColor = (Color)App.Current.Resources["BtnBkgColor"],
+                    //TextColor = (Color)App.Current.Resources["BtnBkgColor"],
                     FontAttributes = FontAttributes.Bold
                 });
                 colTitle.Children.Add(new Label()
@@ -124,7 +124,7 @@ namespace NuMo_Test.Views
                     //HorizontalOptions = LayoutOptions.StartAndExpand,
                     HorizontalOptions = LayoutOptions.EndAndExpand,
 
-                    TextColor = (Color)App.Current.Resources["BtnBkgColor"],
+                    //TextColor = (Color)App.Current.Resources["BtnBkgColor"],
                     FontAttributes = FontAttributes.Bold
                 });
                 //////TODO show what these nutrient values are as percentages of the DRI
@@ -154,14 +154,14 @@ namespace NuMo_Test.Views
                         Text = item.name,
                         HorizontalOptions = LayoutOptions.StartAndExpand,
                         WidthRequest = 150,
-                        Style = App.Current.Resources["LabelStyle"] as Style
+                        //Style = App.Current.Resources["LabelStyle"] as Style
                     });
                     //stack contains nutrient quantity
                     layout.Children.Add(new Label()
                     {
                         Text = Convert.ToString(Math.Round(item.quantity, 4)),
                         HorizontalOptions = LayoutOptions.EndAndExpand,
-                        Style = App.Current.Resources["LabelStyle"] as Style
+                        //Style = App.Current.Resources["LabelStyle"] as Style
                     });
 
                     ///////////TODO add DRI %'s
