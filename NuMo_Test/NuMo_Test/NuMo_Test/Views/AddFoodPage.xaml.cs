@@ -57,10 +57,10 @@ namespace NuMo_Test.Views
             }
 
             //navigate to NutrFacts page, passing in the event arguments
-            nutrFacts = new NutrFacts(this, (NumoNameSearch)e.Item);
+            nutrFacts = new NutrFacts(this, (NumoNameSearch) e.Item);
             await Navigation.PushAsync(nutrFacts);
 
-            selectedResult = (NumoNameSearch)e.Item;
+            selectedResult = (NumoNameSearch) e.Item;
         }
 
         //Clear all fields to make it obvious the button press had an impact.
