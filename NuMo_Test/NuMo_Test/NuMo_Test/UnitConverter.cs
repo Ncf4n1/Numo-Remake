@@ -37,7 +37,10 @@ namespace NuMo_Test
                 var convertItems = db.getCustomQuantifiers(food_no);
                 foreach (var item in convertItems)
                 {
-                    if (item.name.Equals(quantifier))
+                    if (item.
+                        name.
+                        Equals
+                        (quantifier))
                     {
                         multiplier = item.gramsMultiplier;
                         break;

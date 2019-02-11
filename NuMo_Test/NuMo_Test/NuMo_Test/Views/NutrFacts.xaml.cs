@@ -221,8 +221,9 @@ namespace NuMo_Test.Views
             {
                 return UnitsPicker.Title;
             }
-            else
+            else {
                 return null;
+            }
         }
 
 

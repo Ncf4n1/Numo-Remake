@@ -1,20 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Picker Values from Manning CreateItemViewController.swift -->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NuMo_Test.Views.CreateFoodPage"
-             xmlns:vm="clr-namespace:NuMo_Test.ViewModels"
-             Title="{Binding Title}">
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		Title = "Create Food"
+		x:Class="NuMo_Test.Views.CreateFoodPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Save" Clicked="saveButtonClicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout >
+            <TableView>
+                <TableRoot>
+                    <TableSection Title="Item">
+                        <EntryCell x:Name="CreateItemName" Label="Name"/>
+                    </TableSection>
+                    <TableSection Title="Serving">
+                        <ViewCell>
+                            <StackLayout x:Name="layout" Orientation = "Horizontal" Margin = "0,0,0,0">
+                                <Entry x:Name="quantity" Placeholder = "1    " Margin = "10,0,0,0" 
+                           Keyboard="Numeric" WidthRequest ="55"/>
+                                <Entry x:Name="quantifier" Placeholder = "serving" WidthRequest ="80" />
+                                <Label Text = "~=" Margin = "0,0,0,0" VerticalOptions="Center"/>
+                                <Entry x:Name="gramsAmount" Placeholder = "0     "
+                           Keyboard="Numeric" WidthRequest ="65"/>
+                                <Label Text = "Grams" Margin = "0,0,0,0" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection x:Name="nutrientSection" Title="Nutrients">
 
-    <ContentPage.BindingContext>
-        <vm:CreateFoodViewModel />
-    </ContentPage.BindingContext>
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!--Page Level Resources: Compatible with Xamarin Live Player -->
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="Accent">#96d1ff</Color>
-            <Color x:Key="LightTextColor">#999999</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
