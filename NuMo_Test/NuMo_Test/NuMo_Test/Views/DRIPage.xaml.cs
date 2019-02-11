@@ -27,5 +27,10 @@ namespace NuMo_Test.Views
         {
             await DisplayAlert("Reset", "Are you sure you want to reset your Dietary Reference Intakes to the minimum recommended values?", "No", "Yes");
         }
+
+        internal void saveNoLoad()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

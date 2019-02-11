@@ -1,17 +1,14 @@
 ﻿<Properties StartupConfiguration="{3D1E1053-2600-4BE4-A743-C7B1EBB09821}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="NuMo_Test/NuMo_Test/Views/MainPage.xaml.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NuMo_Test/NuMo_Test/Views/SettingsPage.xaml.cs">
     <Files>
-      <File FileName="NuMo_Test/NuMo_Test/Views/ItemDetailPage.xaml.cs" Line="1" Column="1" />
-      <File FileName="NuMo_Test/NuMo_Test/Views/SettingsPage.xaml.cs" Line="13" Column="1" />
-      <File FileName="NuMo_Test/NuMo_Test/Views/MainPage.xaml" Line="1" Column="1" />
-      <File FileName="NuMo_Test/NuMo_Test/Views/MenuPage.xaml.cs" Line="24" Column="1" />
-      <File FileName="NuMo_Test/NuMo_Test/Models/MenuItem.cs" Line="12" Column="1" />
-      <File FileName="NuMo_Test/NuMo_Test/Views/MainPage.xaml.cs" Line="38" Column="2" />
+      <File FileName="NuMo_Test/NuMo_Test/Views/SettingsPage.xaml" Line="89" Column="15" />
+      <File FileName="NuMo_Test/NuMo_Test/Views/SettingsPage.xaml.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.NuMo__Test.Android PreferredExecutionTarget="Android.Android_Accelerated_Oreo" />
   <MonoDevelop.Ide.ItemProperties.NuMo__Test.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.55929819-F0F2-40DF-B3D6-A0807366112D" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
