@@ -1,7 +1,6 @@
 C:\Users\nolla\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\bin\Debug\netstandard2.0\NuMo_Test.deps.json
 C:\Users\nolla\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\bin\Debug\netstandard2.0\NuMo_Test.dll
 C:\Users\nolla\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\bin\Debug\netstandard2.0\NuMo_Test.pdb
-C:\Users\nolla\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\obj\Debug\netstandard2.0\NuMo_Test.csprojAssemblyReference.cache
 C:\Users\nolla\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\obj\Debug\netstandard2.0\App.xaml.g.cs
 C:\Users\nolla\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\obj\Debug\netstandard2.0\Views\AddFoodPage.xaml.g.cs
 C:\Users\nolla\Desktop\Numo-Remake\NuMo_Test\NuMo_Test\NuMo_Test\obj\Debug\netstandard2.0\Views\CreateFoodPage.xaml.g.cs
