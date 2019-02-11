@@ -95,7 +95,16 @@ namespace NuMo_Test
                 data_num = "0" + data_num;
             var quantifier1 = dbConn.Query<ConvertItem>(String.Format("SELECT GmWt_1 as gramsMultiplier, GmWt_Desc1 as name FROM ABBREV WHERE NDB_No = '{0}'", data_num));
             var quantifier2 = dbConn.Query<ConvertItem>(String.Format("SELECT GmWt_2 as gramsMultiplier, GmWt_Desc2 as name FROM ABBREV WHERE NDB_No = '{0}'", data_num));
-            quantifier1.AddRange(quantifier2);
+
+            foreach (var item2 in quantifier2)
+            {
+                if (item2.name != null)
+                {
+                    quantifier1.AddRange(quantifier2);
+                    break;
+                }
+            }
+
             return quantifier1;
         }
 

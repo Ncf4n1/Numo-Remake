@@ -30,6 +30,14 @@
             <Entry x:Name="recipeName" HorizontalOptions="FillAndExpand" Placeholder="Recipe Name"/>
             <Entry x:Name="quantity" HorizontalOptions="FillAndExpand" Placeholder="Quantity" Keyboard="Keyboard.Numeric"/>
             <Entry x:Name="quantifier" HorizontalOptions="FillAndExpand" Placeholder="Quantifier Name"/>
+
+            <ListView x:Name="ingredientList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding DisplayName}" Detail="{Binding Quantity}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

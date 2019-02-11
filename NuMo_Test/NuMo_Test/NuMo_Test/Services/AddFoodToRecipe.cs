@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace NuMo_Test.Services
 {
-    public class AddItemToRecipe : AddFoodPage
+    public class AddFoodToRecipe : AddFoodPage
     {
         List<FoodHistoryItem> recipeList;
 
-        public AddItemToRecipe(List<FoodHistoryItem> temp) : base()
+        public AddFoodToRecipe(List<FoodHistoryItem> temp) : base()
         {
             recipeList = temp;
         }
