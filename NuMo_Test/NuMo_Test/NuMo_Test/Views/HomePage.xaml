@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NuMo_Test.MyDayPageHelpers"
              x:Class="NuMo_Test.Views.HomePage"
               Title="{Binding Title}"
              x:Name="HomeItemsPage">
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked">
             <ToolbarItem.Icon>
@@ -14,32 +16,69 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <ListView x:Name="ItemsListView"
-                ItemsSource="{Binding Items}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemsCommand}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-                ItemSelected="OnItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Text}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            <Label Text="{Binding Description}" 
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="myDayFoodItemTemplate" >
+
+                <TextCell Text="{Binding DisplayName}" Detail="{Binding Quantity}" TextColor="{StaticResource BtnTxtColor}" DetailColor="{StaticResource BtnTxtColor}" Command="{Binding OnEditEvent}" >
+                    <TextCell.ContextActions>
+                        <MenuItem Text="Edit"
+                          Command="{Binding OnEditEvent}"></MenuItem>
+                        <MenuItem Text="Delete"
+                          Command="{Binding OnDeleteEvent}" IsDestructive="True"></MenuItem>
+                    </TextCell.ContextActions>
+                </TextCell>
+
+            </DataTemplate>
+            <DataTemplate x:Key="myDayRemainderTemplate">
+                <ImageCell ImageSource="{Binding RemainderImage.Source}" Text="Reminder" TextColor="{StaticResource BtnTxtColor}" DetailColor="{StaticResource BtnTxtColor}" Command="{Binding OnEditEvent}">
+                    <ImageCell.ContextActions>
+                        <MenuItem Text="Delete"
+                        Command="{Binding OnDeleteEvent}" IsDestructive="True"></MenuItem>
+                    </ImageCell.ContextActions>
+                </ImageCell>
+            </DataTemplate>
+            <DataTemplate x:Key="myDayNutrientTemplate">
+
+                <TextCell Text="{Binding name}" Detail="{Binding quantity}" TextColor="{StaticResource BtnTxtColor}" DetailColor="{StaticResource BtnTxtColor}"/>
+            </DataTemplate>
+            <local:MyDayDataTemplateSelector x:Key="MyDayDataTemplateSelector"
+                         MyDayFoodItemTemplate="{StaticResource myDayFoodItemTemplate}"
+                         MyDayRemainderTemplate="{StaticResource myDayRemainderTemplate}"
+                         MyDayNutrientTemplate="{StaticResource myDayNutrientTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <DatePicker x:Name="datePicker" MinimumDate="01/01/1970" Format="dddd, MMMM d" />
+            <ListView x:Name="listView" ItemTemplate="{StaticResource MyDayDataTemplateSelector}" ItemsSource="{Binding ViewItemList}"/>
+            <!-- <ListView x:Name="ItemsListView"
+                    ItemsSource="{Binding Items}"
+                    VerticalOptions="FillAndExpand"
+                    HasUnevenRows="true"
+                    RefreshCommand="{Binding LoadItemsCommand}"
+                    IsPullToRefreshEnabled="true"
+                    IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                    CachingStrategy="RecycleElement"
+                    ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Text}" 
+                                    LineBreakMode="NoWrap" 
+                                    Style="{DynamicResource ListItemTextStyle}" 
+                                    FontSize="16" />
+                                <Label Text="{Binding Description}" 
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
