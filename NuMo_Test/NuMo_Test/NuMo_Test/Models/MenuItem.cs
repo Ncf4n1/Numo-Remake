@@ -12,7 +12,8 @@ namespace NuMo_Test.Models
         CreateFood,
         Visualize,
         DRI,
-        Settings
+        Settings,
+        CameraPage
     }
     public class MenuItem
     {
