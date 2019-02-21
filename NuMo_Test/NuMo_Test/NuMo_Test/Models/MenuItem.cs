@@ -13,7 +13,8 @@ namespace NuMo_Test.Models
         Visualize,
         DRI,
         Settings,
-        CameraPage
+        CameraPage,
+        Hydration
     }
     public class MenuItem
     {

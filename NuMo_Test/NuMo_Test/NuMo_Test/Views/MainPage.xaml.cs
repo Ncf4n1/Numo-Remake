@@ -50,6 +50,9 @@ namespace NuMo_Test.Views
                     case (int)MenuItemType.CameraPage:
                         MenuPages.Add(id, new NavigationPage(new CameraStuff(DateTime.Now.ToString("MM/dd/yyyy"))));
                         break;
+                    case (int)MenuItemType.Hydration:
+                        MenuPages.Add(id, new NavigationPage(new Hydration()));
+                        break;
                 }
             }
 
