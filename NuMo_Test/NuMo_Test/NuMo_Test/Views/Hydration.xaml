@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NuMo_Test.Views.Hydration">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+
+                <Button x:Name ="addWater" Text = "Add Water" Margin="0,20,0,0" Clicked="AddWater_OnClicked" />
+                <Button x:Name ="minusWater" Margin="0,20,0,0" Text = "Lost Water" Clicked="MinusWater_OnClicked"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Image x:Name="MainImage" WidthRequest="200" HeightRequest="200" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

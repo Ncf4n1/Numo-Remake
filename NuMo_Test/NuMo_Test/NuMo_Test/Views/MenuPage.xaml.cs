@@ -24,6 +24,8 @@ namespace NuMo_Test.Views
                 new Models.MenuItem {Id = MenuItemType.CreateFood, Title="Create Food" },
                 new Models.MenuItem {Id = MenuItemType.Visualize, Title="Visualize"},
                 new Models.MenuItem {Id = MenuItemType.DRI, Title="Dietary Reference Intake" },
+                new Models.MenuItem {Id = MenuItemType.CameraPage, Title="Camera Page" },
+                new Models.MenuItem {Id = MenuItemType.Hydration, Title="Hydration" },
                 new Models.MenuItem {Id = MenuItemType.Settings, Title="Settings" }
             };
 

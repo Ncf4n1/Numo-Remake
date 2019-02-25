@@ -11,8 +11,12 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1029999" />  
     <PackageReference Include="SkiaSharp" Version="1.68.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0.129452" />  
+
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +35,12 @@
     <Compile Update="Views\NutrFacts.xaml.cs">
       <DependentUpon>NutrFacts.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CameraStuff.xaml.cs">
+      <DependentUpon>CameraStuff.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Hydration.xaml.cs">
+      <DependentUpon>Hydration.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +51,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NutrFacts.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CameraStuff.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Hydration.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

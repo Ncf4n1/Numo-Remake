@@ -10,6 +10,8 @@ namespace NuMo_Test.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : MasterDetailPage
     {
+        DateTime date = DateTime.Now;
+
         Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
         public MainPage()
         {
@@ -30,7 +32,8 @@ namespace NuMo_Test.Views
                         MenuPages.Add(id, new NavigationPage(new HomePage()));
                         break;
                     case (int)MenuItemType.AddFood:
-                        MenuPages.Add(id, new NavigationPage(new AddFoodPage()));
+                        var foodHistory = AddItemToFoodHistory.getFoodHistory(date);
+                        MenuPages.Add(id, new NavigationPage(foodHistory));
                         break;
                     case (int)MenuItemType.CreateRecipe:
                         MenuPages.Add(id, new NavigationPage(new CreateRecipePage()));
@@ -46,6 +49,12 @@ namespace NuMo_Test.Views
                         break;
                     case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));
+                        break;
+                    case (int)MenuItemType.CameraPage:
+                        MenuPages.Add(id, new NavigationPage(new CameraStuff(DateTime.Now.ToString("MM/dd/yyyy"))));
+                        break;
+                    case (int)MenuItemType.Hydration:
+                        MenuPages.Add(id, new NavigationPage(new Hydration()));
                         break;
                 }
             }
