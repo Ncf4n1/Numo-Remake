@@ -5,13 +5,15 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+            
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <Label x:Name="Drinks" Text="Default" FontSize="Large" HorizontalOptions="Center"/>
+                <Image x:Name="MainImage" HorizontalOptions="Center" HeightRequest="400" />
+            </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
 
-                <Button x:Name ="addWater" Text = "Add Water" Margin="0,20,0,0" Clicked="AddWater_OnClicked" />
-                <Button x:Name ="minusWater" Margin="0,20,0,0" Text = "Lost Water" Clicked="MinusWater_OnClicked"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Image x:Name="MainImage" WidthRequest="200" HeightRequest="200" />
+                <Button x:Name ="addWater" Text = "Add 8 oz" Margin="0,20,0,0" Clicked="AddWater_OnClicked" />
+                <Button x:Name ="minusWater" Margin="0,20,0,0" Text = "Subtract 8 oz" Clicked="MinusWater_OnClicked"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
