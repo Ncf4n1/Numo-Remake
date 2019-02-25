@@ -157,7 +157,8 @@ namespace NuMo_Test.Views
         //Open a page of graphs to see how a user is doing compared to their goals.
         async void OnVisualizeClicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new VisualizePage());
+            var db = DataAccessor.getDataAccessor();
+            await Navigation.PushAsync(new VisualizePage(db.getNutrients()));
         }
 
         //Get all the nutrients associated with the current selection of days.

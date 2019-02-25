@@ -334,5 +334,11 @@ namespace NuMo_Test
             int changes = dbConn.Execute(String.Format("UPDATE FOOD_DES SET Times_Searched = Times_Searched + 1 WHERE NDB_No = {0}", food_no));
             dbConn.Commit();
         }
+
+        public List<Nutrient> getNutrients()
+        {
+            var nutList = new List<Nutrient>();
+            return nutList;
+        }
     }
 }
