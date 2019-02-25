@@ -88,13 +88,13 @@ namespace NuMo_Test.Views
             foreach (var item in nutrientList)
             {
                 //add nutrient names to list to be passed
-                names.Add(item.name);
+                names.Add(item.DisplayName);
                 //add quantities to list to be passed
                 quantities.Add(item.quantity);
 
                 try
                 {
-                    items[item.name][0] = item.quantity;
+                    items[item.DisplayName][0] = item.quantity;
                 }
                 catch (Exception) { }
             }
