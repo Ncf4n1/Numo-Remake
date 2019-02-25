@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using NuMo_Test.DatabaseItems;
 
 namespace NuMo_Test.Views
 {
@@ -11,6 +12,8 @@ namespace NuMo_Test.Views
     public partial class MainPage : MasterDetailPage
     {
         DateTime date = DateTime.Now;
+
+        int daysToLoad = 1;
 
         Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
         public MainPage()
@@ -75,9 +78,17 @@ namespace NuMo_Test.Views
         private List<Nutrient> getNutrients()
         {
             var db = DataAccessor.getDataAccessor();
+            var baseList = new List<FoodHistoryItem>();
+            for (int i = 0; i < daysToLoad; i++)
+            {
+                baseList.AddRange(db.getFoodHistoryList(date.AddDays(-i).ToString()));
+            }
+            var nutrientList = db.getNutrientsFromHistoryList(baseList);
 
-            var nutrientList = db.getNutrients();
-
+            foreach (var item in nutrientList)
+            {
+                item.quantity /= daysToLoad;
+            }
             return nutrientList;
         }
     }

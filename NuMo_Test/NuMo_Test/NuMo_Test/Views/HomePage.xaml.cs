@@ -158,7 +158,7 @@ namespace NuMo_Test.Views
         async void OnVisualizeClicked(object sender, EventArgs args)
         {
             var db = DataAccessor.getDataAccessor();
-            await Navigation.PushAsync(new VisualizePage(db.getNutrients()));
+            //TODO:await Navigation.PushAsync(new VisualizePage(db.getNutrientsFromHistoryList()));
         }
 
         //Get all the nutrients associated with the current selection of days.

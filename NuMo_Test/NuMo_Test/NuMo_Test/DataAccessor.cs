@@ -335,10 +335,5 @@ namespace NuMo_Test
             dbConn.Commit();
         }
 
-        public List<Nutrient> getNutrients()
-        {
-            var nutList = new List<Nutrient>();
-            return nutList;
-        }
     }
 }

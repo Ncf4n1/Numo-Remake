@@ -23,8 +23,12 @@ namespace NuMo_Test.Views
         public VisualizePage(List<Nutrient> nutrientList)
         {
 
-            InitializeComponent();
+            //TODO:InitializeComponent();
 
+            //var prog1 = new ProgressBar {
+            //    Progress = .2
+            //};
+            
             //nutrient names
             names = new List<String>();
             //quantities consumed
@@ -35,7 +39,7 @@ namespace NuMo_Test.Views
             progBars = new List<ProgressBar>();
 
             items = new Dictionary<String, Double[]>();
-            initializeItems();
+            //TODO:initializeItems();
 
             //find how many days to calculate nutrients for
             //Title += " " + titleExtra;
@@ -53,7 +57,7 @@ namespace NuMo_Test.Views
             //}
 
             //call to fill the names/quantities/dri lists
-            getData(nutrientList);
+            //TODO:getData(nutrientList);
 
         }
 
@@ -62,7 +66,7 @@ namespace NuMo_Test.Views
             base.OnAppearing();
 
             //animate the progress bars
-            drawBars();
+            //TODO:drawBars();
         }
 
         private void drawBars()
