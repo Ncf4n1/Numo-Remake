@@ -39,7 +39,7 @@ namespace NuMo_Test.Views
                         MenuPages.Add(id, new NavigationPage(new CreateFoodPage()));
                         break;
                     case (int)MenuItemType.Visualize:
-                        MenuPages.Add(id, new NavigationPage(new VisualizePage()));
+                        MenuPages.Add(id, new NavigationPage(new VisualizePage(getNutrients())));
                         break;
                     case (int)MenuItemType.DRI:
                         MenuPages.Add(id, new NavigationPage(new DRIPage()));
@@ -61,6 +61,15 @@ namespace NuMo_Test.Views
 
                 IsPresented = false;
             }
+        }
+
+        private List<Nutrient> getNutrients()
+        {
+            var db = DataAccessor.getDataAccessor();
+
+            var nutrientList = db.getNutrients();
+
+            return nutrientList;
         }
     }
 }

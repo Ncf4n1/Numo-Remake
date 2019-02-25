@@ -1,14 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NuMo_Test.Views.VisualizePage"
              xmlns:vm="clr-namespace:NuMo_Test.ViewModels"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              Title="{Binding Title}">
-
+            
+<!--        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface">
+            <skia:SKCanvasView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCanvasViewTapped" />
+            </skia:SKCanvasView.GestureRecognizers>
+        </skia:SKCanvasView>-->
+    
     <ContentPage.BindingContext>
         <vm:VisualizeViewModel />
     </ContentPage.BindingContext>
-
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Page Level Resources: Compatible with Xamarin Live Player -->
