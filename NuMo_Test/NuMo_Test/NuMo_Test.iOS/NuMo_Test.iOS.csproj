@@ -147,7 +147,7 @@
     <ImageAsset Include="Assets.xcassets\MedMedWater.imageset\MedMedWater.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\MedWater.imageset\LowHighWater.png">
+    <ImageAsset Include="Assets.xcassets\MedWater.imageset\MedWater.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\NoWater.imageset\Contents.json">
