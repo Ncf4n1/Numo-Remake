@@ -298,7 +298,7 @@ namespace NuMo_Test
                     var newItem = new MyDayFoodItem();
                     newItem.id = result.History_Id;
                     newItem.DisplayName = getNameFromID(result.food_no);
-                    newItem.Quantity = "(" + result.Quantity.ToString() + ") " + result.Quantifier;
+                    newItem.quantity = "(" + result.Quantity.ToString() + ") " + result.Quantifier;
                     resultList.Add(newItem);
                 }
             }

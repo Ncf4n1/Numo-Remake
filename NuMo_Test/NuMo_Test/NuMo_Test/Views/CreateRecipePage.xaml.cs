@@ -87,7 +87,7 @@ namespace NuMo_Test.Views
             {
                 var foodItem = new MyDayFoodItem();
                 foodItem.DisplayName = item.DisplayName;
-                foodItem.Quantity = "(" + item.Quantity + ")" + " " + item.Quantifier;
+                foodItem.quantity = "(" + item.Quantity + ")" + " " + item.Quantifier;
                 foodItems.Add(foodItem);
             }
             ingredientList.ItemsSource = foodItems;

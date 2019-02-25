@@ -18,11 +18,17 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <DatePicker x:Name="datePicker" MinimumDate="01/01/1970" Format="dddd, MMMM d" />
+            <DatePicker x:Name="datePicker" MinimumDate="01/01/1970" Format="dddd, MMMM d" DateSelected="dateClicked"/>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Label Text="View Nutrients" TextColor="#00CED1" Margin="15, 0, 0, 0"/>
+                <Switch IsToggled="False" Toggled="viewToggle"/>
+            </StackLayout>
+            
             <ListView x:Name="listView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding DisplayName}"/>
+                        <TextCell Text="{Binding DisplayName}" Detail="{Binding quantity}" TextColor="DarkBlue"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

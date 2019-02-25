@@ -151,7 +151,7 @@ namespace NuMo_Test.Views
                     //stack contains nutrient name
                     layout.Children.Add(new Label()
                     {
-                        Text = item.name,
+                        Text = item.DisplayName,
                         HorizontalOptions = LayoutOptions.StartAndExpand,
                         WidthRequest = 150,
                         //Style = App.Current.Resources["LabelStyle"] as Style
