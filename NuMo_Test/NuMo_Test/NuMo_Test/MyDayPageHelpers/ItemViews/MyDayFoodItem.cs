@@ -12,7 +12,7 @@ namespace NuMo_Test.ItemViews
     class MyDayFoodItem : IMyDayViewItem
     {
         public String DisplayName { get; set; }
-        public String Quantity { get; set; }
+        public String quantity { get; set; }
         public int id { get; set; }
         public ICommand OnEditEvent { get; set; }
         public ICommand OnDeleteEvent { get; set; }
