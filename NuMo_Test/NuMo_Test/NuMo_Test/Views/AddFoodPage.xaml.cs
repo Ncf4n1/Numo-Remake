@@ -17,6 +17,9 @@ namespace NuMo_Test.Views
 
         public NutrFacts nutrFacts;
 
+        DateTime date = DateTime.Now;
+
+
         public AddFoodPage()
         {
             InitializeComponent();
@@ -66,7 +69,30 @@ namespace NuMo_Test.Views
         //Clear all fields to make it obvious the button press had an impact.
         public virtual void saveButtonClicked(object sender, EventArgs args)
         {
+            if (nutrFacts != null)
+            {
+                var nutrQuantifier = nutrFacts.getQuantifier();
+                var nutrQuantity = nutrFacts.Quantity;
+                //save info to database here
+                if (selectedResult != null && nutrQuantity != null && !nutrQuantity.Equals("0") && nutrQuantifier != null && date != null)
+                {
+                    var db = DataAccessor.getDataAccessor();
 
+                    //Increment the times this item has been selected so it will get priority in the future
+                    db.incrementTimesSearched(selectedResult.food_no);
+
+                    FoodHistoryItem item = new FoodHistoryItem();
+                    //need to add date, quantity, quantifiers, and food_no to this item
+                    item.food_no = selectedResult.food_no;
+                    item.Date = date.ToString();
+                    item.Quantity = Convert.ToDouble(nutrQuantity);
+                    item.Quantifier = nutrQuantifier;
+
+
+                    //Add to our database
+                    db.addFoodHistory(item);
+                }
+            }
         }
     }
 }
