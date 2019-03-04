@@ -15,17 +15,26 @@ namespace NuMo_Test.Views
     {
         int numberOfDrinks = 0;
         Image waterLevel = new Image();
-
+        DateTime date = DateTime.Now;
+        DataAccessor db = DataAccessor.getDataAccessor();
         //initial setup
         public Hydration()
         {
             InitializeComponent();
             this.Title = "The Hydration Station";
             this.Drinks.Text = numberOfDrinks + " glasses of water";
-            SetNewWaterImage(); //initialize water level at 0
-            MainImage.Source = waterLevel.Source;
-            CrossLocalNotifications.Current.Show("Stay Hydrated!", "Don't forget to drink water today!", 101, DateTime.Now.AddDays(1)); //send a notification to remind to stay hydrated every 24 hours
             
+            CrossLocalNotifications.Current.Show("Stay Hydrated!", "Don't forget to drink water today!", 101, DateTime.Now.AddDays(1)); //send a notification to remind to stay hydrated every 24 hours
+            String dbDrinks = db.getHydralog(date.ToString("MM/dd/yyyy"));
+            if (!dbDrinks.Equals("")) //if todays date is in the db already
+            {
+                DisplayOldHydration(dbDrinks); //display the stored info for today
+            }
+            else
+            {
+                SetNewWaterImage(); //initialize water level at 0 and display
+                MainImage.Source = waterLevel.Source;
+            }
         }
         //action events for when water is added
         private void AddWater_OnClicked(object sender, EventArgs e)
@@ -49,11 +58,36 @@ namespace NuMo_Test.Views
             
 
         }
+        //Date changed
+        void dateClicked(object sender, DateChangedEventArgs e)
+        {
+            String key = date.ToString("MM/dd/yyyy");
+            int val = numberOfDrinks;
+            db.saveHydralog(key, val+""); //store the hydration log
+            date = e.NewDate;
+            String dbDrinks = db.getHydralog(date.ToString("MM/dd/yyyy"));
+            //check if new date is in db
+            if (!dbDrinks.Equals(""))
+            {
+                DisplayOldHydration(dbDrinks);
+            }
+            else
+            {
+                numberOfDrinks = 0;
+                this.Drinks.Text = numberOfDrinks + " glasses of water";
+                SetNewWaterImage();
+                MainImage.Source = waterLevel.Source;
+            }
 
+            this.OnAppearing();
+        }
         //sets a new hydration image depending on the number of drinks
         private void SetNewWaterImage()
         {
-            switch(numberOfDrinks){
+            String key = date.ToString("MM/dd/yyyy");
+            int val = numberOfDrinks;
+            db.saveHydralog(key, val + ""); //update the data entry
+            switch (numberOfDrinks){
                 case 0:
                     //waterLevel = new Image { Source = "water.jpg" };
                     waterLevel.Source = "NoWater.png";
@@ -84,6 +118,17 @@ namespace NuMo_Test.Views
                     break;
 
             }
+
         }
+        //sets the hydration to the level specified in db for selected date
+        private void DisplayOldHydration(String dateKey)
+        {
+            int newDrinks = Convert.ToInt32(dateKey);
+            numberOfDrinks = newDrinks;
+            this.Drinks.Text = numberOfDrinks + " glasses of water";
+            SetNewWaterImage();
+            MainImage.Source = waterLevel.Source; 
+        }
+
     }
 }

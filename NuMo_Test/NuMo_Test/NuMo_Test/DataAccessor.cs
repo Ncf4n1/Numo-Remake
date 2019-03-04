@@ -334,5 +334,38 @@ namespace NuMo_Test
             int changes = dbConn.Execute(String.Format("UPDATE FOOD_DES SET Times_Searched = Times_Searched + 1 WHERE NDB_No = {0}", food_no));
             dbConn.Commit();
         }
+
+        //save hydration log
+        public void saveHydralog(String HydraName, String HYDRValue)
+        {
+            var values = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT Hydr_Name from HYDR_VALUES WHERE Hydr_Name = '{0}'", HydraName));
+            if (values.Any())
+            {
+                dbConn.Execute(String.Format("UPDATE HYDR_VALUES set HYDR_Val = '{0}' WHERE Hydr_Name = '{1}'", HYDRValue, HydraName));
+            }
+            else
+            {
+                dbConn.Execute(String.Format("INSERT INTO HYDR_VALUES (Hydr_Name, HYDR_Val) VALUES ('{0}', '{1}')", HydraName, HYDRValue));
+            }
+        }
+
+        public string getHydralog(String HydraName)
+        {
+            var tableExist = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT name FROM sqlite_master WHERE type = '{0}' AND name = '{1}'","table" ,"HYDR_VALUES"));
+            if (tableExist.Any())
+            {
+            }
+            else
+            {
+                dbConn.Query<MyDayRemainderItem>(String.Format("CREATE TABLE HYDR_VALUES (Hydr_Name varchar(20), Hydr_Val varchar(20));"));
+            }
+
+            var values = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT Hydr_Val as imageString from HYDR_VALUES WHERE Hydr_Name = '{0}'", HydraName));
+            if (values.Any())
+                return values.First().imageString;
+            else
+                return "";
+        }
+
     }
 }
