@@ -190,7 +190,7 @@ namespace NuMo_Test.Views
         async void OnReminderClicked(object sender, EventArgs args)
         {
             //Go to camera
-            await Navigation.PushAsync(new CameraStuff(this.date.ToString()));
+            await Navigation.PushAsync(new CameraStuff(this.date));
         }
 
         //Allow user to update the current date

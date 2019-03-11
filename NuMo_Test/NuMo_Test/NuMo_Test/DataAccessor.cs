@@ -367,5 +367,54 @@ namespace NuMo_Test
                 return "";
         }
 
+        //save picture urls for days
+        public void savePicReminder(String picDate, String picPath, String picNum)
+        {
+            var values = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT Pic_Name from PIC_VALUES WHERE Pic_Name = '{0}' AND Pic_Num = '{1}'", picDate,picNum));
+            if (values.Any())
+            {
+                dbConn.Execute(String.Format("UPDATE PIC_VALUES set Pic_Val = '{0}' WHERE Pic_Name = '{1}' AND Pic_Num = '{2}'", picPath, picDate,picNum));
+            }
+            else
+            {
+                dbConn.Execute(String.Format("INSERT INTO PIC_VALUES (Pic_Name, Pic_Val, Pic_Num) VALUES ('{0}', '{1}','{2}')", picDate, picPath,picNum));
+            }
+        }
+
+        public string getPicReminder(String picDate, String picNum)
+        {
+            var tableExist = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT name FROM sqlite_master WHERE type = '{0}' AND name = '{1}'", "table", "PIC_VALUES"));
+            if (tableExist.Any())
+            {
+            }
+            else
+            {
+                dbConn.Query<MyDayRemainderItem>(String.Format("CREATE TABLE PIC_VALUES (Pic_Name varchar(20), Pic_Val varchar(2000), Pic_Num varchar(2));"));
+            }
+
+            var values = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT Pic_Val as imageString from PIC_VALUES WHERE Pic_Name = '{0}' AND Pic_Num = '{1}'", picDate, picNum));
+            if (values.Any())
+                return values.First().imageString;
+            else
+                return "";
+        }
+        //Delete an entry in the picture table
+        public void deletePicture(String picDate, String picNum)
+        {
+            var values = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT Pic_Name from PIC_VALUES WHERE Pic_Name = '{0}' AND Pic_Num = '{1}'", picDate,picNum));
+            if (values.Any())
+            {
+                String filePath = getPicReminder(picDate,picNum);
+                if (File.Exists(filePath))
+                {
+                    //File.Delete(filePath);    //doesn't seem to delete fully, phone thinks image is still there when its not, which can cause weird crashes
+                    Console.WriteLine("File Deleted");
+                }
+                dbConn.Execute(String.Format("DELETE FROM PIC_VALUES WHERE Pic_Name = '{0}' AND Pic_Num = '{1}'", picDate,picNum)); //doesnt seem to execute?
+
+
+            }
+        }
+
     }
 }
