@@ -335,5 +335,73 @@ namespace NuMo_Test
             dbConn.Commit();
         }
 
+        /* method to get a list of each tracked nutrient as a readable name.
+         * uses GetDRINames to get the initial list of DRI names        
+         * uses DRIToName to convert the DRI names to readable names
+         * returns a list of readable names        
+         * used for visualize page writing
+         */
+        public List<String> GetNutNames()
+        {
+            var dris = GetDRINames();
+            List<String> nameStrings = new List<string>();
+            foreach (String DRIname in dris)
+            {
+                nameStrings.Add(DRIToName(DRIname));
+            }
+            return nameStrings;
+        }
+
+        /* method to get the entire list of DRI nutrient names used in the database
+         * return the names of nutrients, starting with "dri_" and ending with the camel case name
+         */
+        public List<String> GetDRINames()
+        { 
+            // String array of macronutrient names
+            String[] macroNutStrings = { "dri_calories", "dri_totalCarbs", "dri_dietaryFiber", "dri_sugar", "dri_netCarbs", "dri_protein" };
+            // String array of macronutrient names
+            String[] vitNutStrings = { "dri_vitaminA", "dri_vitaminC", "dri_vitaminD", "dri_vitaminE", "dri_vitaminK", "dri_thiamin", "dri_riboflavin", "dri_niacin", "dri_vitaminB6", "dri_folate", "dri_vitaminB12", "dri_pantothenicAcid" };
+            // String array of macronutrient names
+            String[] minNutStrings = { "dri_calcium", "dri_iron", "dri_magnesium", "dri_phosphorus", "dri_potassium", "dri_sodium", "dri_zinc", "dri_copper", "dri_manganese", "dri_selenium" };
+
+            List<String> nutNameList = new List<string>();
+            foreach (String str in macroNutStrings) {
+                nutNameList.Add( str );
+            }
+            foreach (String str in vitNutStrings)
+            {
+                nutNameList.Add( str );
+            }
+            foreach (String str in minNutStrings)
+            {
+                nutNameList.Add( str );
+            }
+            return nutNameList;
+
+        }
+
+        /* method to convert the DRI nutrient name to a readable name
+         * returns a string that is capitalized and has spaces between words
+         * used to help the GetNutNames function in DataAccessor
+         */
+        private String DRIToName(String driString)
+        {
+            var nameString = driString.Split('_')[1];
+            List<char> charList = new List<char>();
+
+            foreach (char currentChar in nameString.ToArray())
+            {
+                if (Char.IsUpper(currentChar))
+                {
+                    charList.Add(' ');
+                }
+
+                charList.Add(currentChar);
+
+            }
+
+            charList[0] = Char.ToUpper(charList[0]);
+            return charList.ToString();
+        }
     }
 }
