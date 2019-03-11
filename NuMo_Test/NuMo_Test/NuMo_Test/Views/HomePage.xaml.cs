@@ -40,7 +40,9 @@ namespace NuMo_Test.Views
 
 
             ViewItemList = new List<IMyDayViewItem>();
-
+            var timeArr = new String[] { "Today", "This Week", "This Month" };
+            timePicker.ItemsSource = timeArr;
+            timePicker.SelectedItem = timeArr[0];
 
             //ToolbarItem plus = new ToolbarItem();
             //plus.Icon = "ic_add_black_24dp.png";
@@ -83,6 +85,12 @@ namespace NuMo_Test.Views
         {
             var foodHistory = AddItemToFoodHistory.getFoodHistory(date);
             await Navigation.PushAsync(foodHistory);
+        }
+        
+
+        async void AddKeto(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new KetoPage());
         }
 
         //Display the food items associated with today, and back in time to the number of selected days.
@@ -183,7 +191,7 @@ namespace NuMo_Test.Views
         async void OnReminderClicked(object sender, EventArgs args)
         {
             //Go to camera
-            await Navigation.PushAsync(new CameraStuff(this.date.ToString()));
+            await Navigation.PushAsync(new CameraStuff(this.date));
         }
 
         //Allow user to update the current date
@@ -197,15 +205,15 @@ namespace NuMo_Test.Views
         void OnTimeLengthChoiceChanged(object sender, EventArgs e)
         {
             //this.Title = timeLengthChoice.Items.ElementAt(timeLengthChoice.SelectedIndex);
-            if (this.Title == "One Day Report")
+            if ((String) timePicker.SelectedItem == "Today")
             {
                 daysToLoad = 1;
             }
-            else if (this.Title == "7 Day Report")
+            else if ((String) timePicker.SelectedItem == "This Week")
             {
                 daysToLoad = 7;
             }
-            else if (this.Title == "30 Day Report")
+            else if ((String) timePicker.SelectedItem == "This Month")
             {
                 daysToLoad = 30;
             }

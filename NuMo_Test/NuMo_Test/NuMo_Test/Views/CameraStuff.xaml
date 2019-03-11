@@ -5,13 +5,47 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <DatePicker x:Name="datePicker" MinimumDate="01/01/1970" Format="ddd, MMMM d" DateSelected="dateClicked"/>
                 
-                    <Button x:Name ="cameraButton" Text = "Take Photo" Margin="0,20,0,0" Clicked="TakePhotoButton_OnClicked" />
-                    <Button x:Name ="photoAlbumButton" Margin="0,20,0,0" Text = "Upload Photo" Clicked="PickPhotoButton_OnClicked"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Image x:Name="MainImage" WidthRequest="200" HeightRequest="200" />
+                <Label x:Name="MealOne" Text="Meal 1" HorizontalOptions="Center"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" WidthRequest="120">
+                        <Label x:Name="Before" Text="Pre" HorizontalOptions="Center"/>
+                        <ImageButton x:Name="MainImage" ClassId="Button1" Source="Plus.png"  HeightRequest="120"  Clicked="Image_OnClicked" BackgroundColor="WhiteSmoke" CornerRadius="15"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" WidthRequest="120">
+                        <Label x:Name="After" Text="Post" HorizontalOptions="Center"/>
+                        <ImageButton x:Name="Image2" ClassId="Button2" Source="Plus.png"  HeightRequest="120"  Clicked="Image_OnClicked" BackgroundColor="WhiteSmoke" CornerRadius="15"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Label x:Name="MealTwo" Text="Meal 2" HorizontalOptions="Center"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" WidthRequest="120">
+                        <Label x:Name="Before2" Text="Pre" HorizontalOptions="Center"/>
+                        <ImageButton x:Name="Image3" ClassId="Button3" Source="Plus.png"  HeightRequest="120"  Clicked="Image_OnClicked" BackgroundColor="WhiteSmoke" CornerRadius="15"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" WidthRequest="120">
+                        <Label x:Name="After2" Text="Post" HorizontalOptions="Center"/>
+                        <ImageButton x:Name="Image4" ClassId="Button4" Source="Plus.png"  HeightRequest="120"  Clicked="Image_OnClicked" BackgroundColor="WhiteSmoke" CornerRadius="15"/>
+                    </StackLayout>
+                </StackLayout>
+                
+                <Label x:Name="MealTre" Text="Meal 3" HorizontalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" WidthRequest="120">
+                            <Label x:Name="Before3" Text="Pre" HorizontalOptions="Center"/>
+                            <ImageButton x:Name="Image5" ClassId="Button5" Source="Plus.png"  HeightRequest="120"  Clicked="Image_OnClicked" BackgroundColor="WhiteSmoke" CornerRadius="15"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" WidthRequest="120">
+                            <Label x:Name="After3" Text="Post" HorizontalOptions="Center"/>
+                            <ImageButton x:Name="Image6" ClassId="Button6" Source="Plus.png"  HeightRequest="120"  Clicked="Image_OnClicked" BackgroundColor="WhiteSmoke" CornerRadius="15"/>
+                        </StackLayout>
+                    </StackLayout>
+
             </StackLayout>
         </StackLayout>
         
