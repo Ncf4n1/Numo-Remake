@@ -4,22 +4,22 @@
              x:Class="NuMo_Test.Views.VisualizePage"
              xmlns:vm="clr-namespace:NuMo_Test.ViewModels"
              xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms">
-             Title="{Binding Title}">
             
     
     <ContentPage.BindingContext>
         <vm:VisualizeViewModel />
     </ContentPage.BindingContext>
     
-    
-    
-    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-        <views:SKCanvasView x:Name="canvas" PaintSurface="OnPaintSample" VerticalOptions="StartAndExpand" HorizontalOptions="Fill">        
+    <StackLayout Orientation="Vertical" >
+
+        <Label Text="Calories"/>
+        <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="drawBaseVisual" HorizontalOptions="Fill">        
         </views:SKCanvasView>
-        <views:SKCanvasView x:Name="canvas2" PaintSurface="OnPaintSample2" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill">        
+        
+        <Label Text="Protein"/>
+        <views:SKCanvasView x:Name="ProteinBarCanvas" PaintSurface="drawBaseVisual" HorizontalOptions="Fill">        
         </views:SKCanvasView>
-    </Grid>
-    
+    </StackLayout>
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Page Level Resources: Compatible with Xamarin Live Player -->

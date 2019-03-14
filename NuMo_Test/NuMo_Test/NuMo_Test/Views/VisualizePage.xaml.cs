@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
+
 
 namespace NuMo_Test.Views
 {
@@ -24,10 +26,13 @@ namespace NuMo_Test.Views
         List<bool> displayNut = new List<bool>(); // which nutrients should be displayed
 
         // light shades used for unfilled visualize bar drawings
-        Color LIGHTRED = new Color(255, 145, 140);
-        Color LIGHTGREEN = new Color(145, 155, 143);
-        Color LIGHTYELLOW = new Color(255, 255, 128);
+        SKColor LIGHTRED = new SKColor(255, 181, 181);
+        SKColor LIGHTGREEN = new SKColor(211, 255, 188);
+        SKColor LIGHTYELLOW = new SKColor(255, 255, 171);
+        SKColor BASEBACKGROUND = new SKColor(33, 150, 243);
 
+        // Stopwatch to animate bars
+        Stopwatch stopwatch = new Stopwatch();
 
         public VisualizePage(List<Nutrient> nutrientList)
         {
@@ -49,78 +54,91 @@ namespace NuMo_Test.Views
             nutNames = db.GetNutNames();
             nutDRINames = db.GetDRINames();
 
-            foreach(var DRIname in nutDRINames)
+            //TODO: Remove this, add consumed info
+            nutConsumed.Add(2000);
+            nutConsumed.Add(50);
+
+            foreach (var DRIname in nutDRINames)
             {
                 var DRIthreshholds = db.getDRIThresholds(DRIname);
                 var midDRI = Double.Parse(db.getDRIValue(DRIname));
 
                 DRImed.Add(midDRI);
-                DRIlow.Add(midDRI*.25);
+
+                /* Accessing DRIThreshholds from database was causing null errors.
+                 * Current low and high calculations are done with these constant 
+                 * multipliers in DRIPage, so base funtionallity is present here
+                 * Will need to get updated upon DRI threshold changes                
+                 */               
+                DRIlow.Add(midDRI * .25);
                 DRIhigh.Add(midDRI * 1.25);
-
             }
-
         }
 
-        private void OnPaintSample(object sender, SKPaintSurfaceEventArgs e)
-        {
-
-            int surfaceWidth = e.Info.Width;
-            int surfaceHeight = e.Info.Height;
-            float side = Math.Min(surfaceHeight, surfaceWidth) * 0.5f;
-            float drawWidth = surfaceWidth - 20;
-            SKCanvas canvas = e.Surface.Canvas;
-
-            using (SKPaint paint = new SKPaint())
-            {
-                canvas.Clear(Color.Black.ToSKColor());
-                SKRect calRect = new SKRect(10f, 20f, surfaceWidth - 10, surfaceHeight - 20);
-                SKRoundRect calRRect = new SKRoundRect(calRect, 25f, 25f);
-                paint.Color = Color.Blue.ToSKColor();
-                canvas.DrawRoundRect(calRRect, paint);
-            }
-
-        }
-
-        private void OnPaintSample2(object sender, SKPaintSurfaceEventArgs e)
+        /* Method to create the underlying empty bar for nutritional visualizations       
+         * Called for each base cell of each nutrient
+         */
+        private void drawBaseVisual(object sender, SKPaintSurfaceEventArgs e)
         {
             SKCanvas canvas = e.Surface.Canvas;
 
             using (SKPaint paint = new SKPaint())
             {
-                drawBaseVisual(canvas,paint,e);
-            }
+                canvas.Clear(BASEBACKGROUND);
 
+                var width = e.Info.Width - 60;
+                var height = e.Info.Height - 30;
+
+                // The left rounded edge of the nutrition visual
+                // Starts Red to indicate that it could fill up
+                SKRoundRect firstRound = new SKRoundRect(new SKRect(15f, 15f, 45f, height + 15f), 15f, 15f);
+                paint.Color = Color.Red.ToSKColor();
+                canvas.DrawRoundRect(firstRound, paint);
+
+                // The right rounded edge
+                SKRoundRect secondRound = new SKRoundRect(new SKRect(width + 15f, 15f, width + 45f, height + 15f), 15f, 15f);
+                paint.Color = LIGHTRED;
+                canvas.DrawRoundRect(secondRound, paint);
+
+                // Rectangle for consumed DRI 0 tp Min Threshold
+                SKRect firstRect = new SKRect(30, 15, (width / 10) + 25f + 30, height + 15);
+                paint.Color = LIGHTRED;
+                canvas.DrawRect(firstRect, paint);
+
+                // Rectangle for consumed DRI from Min Threshold to half way between Min and DRI
+                SKRect secRect = new SKRect((width / 10) + 30, 15, (width / 10) * 3 + 30, height + 15);
+                paint.Color = LIGHTYELLOW;
+                canvas.DrawRect(secRect, paint);
+
+                // Rectangle for consumed DRI from 
+                // half way between low thresh and DRI to half way from DRI to max threshhold
+                SKRect thirdRect = new SKRect((width / 10) * 3 + 30, 15, (width / 10) * 7 + 30, height + 15);
+                paint.Color = LIGHTGREEN;
+                canvas.DrawRect(thirdRect, paint);
+
+                // Rectangle for consumed DRI from 
+                // halfway between DRI and max threshhold to max threshold
+                SKRect fourRect = new SKRect((width / 10) * 7 + 30, 15, (width / 10) * 9 + 30, height + 15);
+                paint.Color = LIGHTYELLOW;
+                canvas.DrawRect(fourRect, paint);
+
+                // Rectangle for consumed DRI from max threshold to twice the regular DRI
+                SKRect fiveRect = new SKRect(((width / 10) * 9) - 25f + 30, 15, width + 30, height + 15);
+                paint.Color = LIGHTRED;
+                canvas.DrawRect(fiveRect, paint);
+
+            }
         }
 
-        private void drawBaseVisual(SKCanvas canvas, SKPaint paint, SKPaintSurfaceEventArgs e)
+        async Task AnimateBar()
         {
-            canvas.Clear(Color.Blue.ToSKColor());
+            stopwatch.Start();
+            double t = stopwatch.Elapsed.TotalSeconds;
+            while (t <= 1)
+            {
 
-            var width = e.Info.Width - 30;
-            var height = e.Info.Height - 30;
-
-            SKRect firstRect = new SKRect(15, 15, (width / 10) + 25f + 15, height + 15);
-            SKRoundRect firstRRect = new SKRoundRect(firstRect, 15f, 15f);
-            paint.Color = Color.Salmon.ToSKColor();
-            canvas.DrawRoundRect(firstRRect, paint);
-
-            SKRect secRect = new SKRect((width / 10) + 15, 15, (width / 10) * 3 + 15, height + 15);
-            paint.Color = Color.LightGoldenrodYellow.ToSKColor();
-            canvas.DrawRect(secRect, paint);
-
-            SKRect thirdRect = new SKRect((width / 10) * 3 + 15, 15, (width / 10) * 7 + 15, height + 15);
-            paint.Color = Color.LightGreen.ToSKColor();
-            canvas.DrawRect(thirdRect, paint);
-
-            SKRect fiveRect = new SKRect(((width / 10) * 9) - 25f + 15, 15, width + 15, height + 15);
-            SKRoundRect fiveRRect = new SKRoundRect(fiveRect, 15f, 15f);
-            paint.Color = Color.Salmon.ToSKColor();
-            canvas.DrawRoundRect(fiveRRect, paint);
-
-            SKRect fourRect = new SKRect((width / 10) * 7 + 15, 15, (width / 10) * 9 + 15, height + 15);
-            paint.Color = Color.LightGoldenrodYellow.ToSKColor();
-            canvas.DrawRect(fourRect, paint);
+            }
+            stopwatch.Stop();
 
         }
     }
