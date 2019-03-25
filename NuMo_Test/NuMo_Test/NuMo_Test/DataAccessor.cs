@@ -450,7 +450,7 @@ namespace NuMo_Test
                 dbConn.Execute(String.Format("INSERT INTO PIC_VALUES (Pic_Name, Pic_Val, Pic_Num) VALUES ('{0}', '{1}','{2}')", picDate, picPath,picNum));
             }
         }
-
+        //get the urls for stored pictures by date and number
         public string getPicReminder(String picDate, String picNum)
         {
             var tableExist = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT name FROM sqlite_master WHERE type = '{0}' AND name = '{1}'", "table", "PIC_VALUES"));
@@ -481,10 +481,32 @@ namespace NuMo_Test
                     //File.Delete(filePath);    //doesn't seem to delete fully, phone thinks image is still there when its not, which can cause weird crashes
                     Console.WriteLine("File Deleted");
                 }
-                dbConn.Execute(String.Format("DELETE FROM PIC_VALUES WHERE Pic_Name = '{0}' AND Pic_Num = '{1}'", picDate,picNum)); //doesnt seem to execute?
+                dbConn.Execute(String.Format("DELETE FROM PIC_VALUES WHERE Pic_Name = '{0}' AND Pic_Num = '{1}'", picDate,picNum)); 
 
 
             }
+
         }    
+
+        
+        //Determine if pics were taken this week
+        public String getPreviousWeekPics(DateTime today)
+        {
+            String picDate = "";
+            String foundPics = ""; 
+            //only check today and last 6 days
+            for (int i = 0; i < 6; i++)
+            {
+                picDate = today.AddDays((-1 * i)).ToString("MM/dd/yyyy");
+                var values = dbConn.Query<MyDayRemainderItem>(String.Format("SELECT Pic_Name from PIC_VALUES WHERE Pic_Name = '{0}'", picDate));
+                if (values.Any())
+                {
+                    //concatenate the dates with pics into a string with new lines for display in alert
+                    foundPics = "\t"+today.AddDays((-1 * i)).ToString("MM/dd/yyyy") + "\n" + foundPics;
+                }
+            }
+            return foundPics;
+        }
+
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.IO;
 
 
 /* Camera page for uploading or taking pictures to save as reminders
@@ -22,6 +23,7 @@ namespace NuMo_Test.Views
         String pPath="";
         DateTime date;
         DataAccessor db = DataAccessor.getDataAccessor();
+        
         public CameraStuff(DateTime dateS)
         {
             // Initialize the toolbar with save button, date, and title
@@ -39,7 +41,7 @@ namespace NuMo_Test.Views
         {
             // If the take picure button is clicked, check if a camera is supported and use it if so
             await CrossMedia.Current.Initialize();
-
+            getPermissions();
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
                 await DisplayAlert("No Camera", ":( No camera available.", "OK");
@@ -184,6 +186,12 @@ namespace NuMo_Test.Views
             {
                 dbPicPath = db.getPicReminder(formattedDate, i + "");
                 pPath = dbPicPath;
+                //make sure file still exists (incase user deletes album)
+                if (!File.Exists(dbPicPath))
+                {
+                    db.deletePicture(formattedDate, i + "");
+                    dbPicPath = "";
+                }
                 switch (i)
                 {
                     //changes image placement depending on counter
@@ -214,5 +222,27 @@ namespace NuMo_Test.Views
                 }
             }
         }
+        /*
+        //make sure permissions are on (NOT IN USE ATM)
+        public async void getPermissions()
+        {
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            if(cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionAsync(new[] { Permission.Camera, Peemission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+            }
+
+        }
+        */
     }
 }
