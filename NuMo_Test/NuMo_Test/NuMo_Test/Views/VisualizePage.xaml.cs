@@ -14,7 +14,16 @@ namespace NuMo_Test.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VisualizePage : ContentPage
-    {
+    { 
+        DateTime date;
+        List<IMyDayViewItem> ViewItemList;
+
+        int daysToLoad = 1;
+
+        SKCanvas canvas1;
+        int width1 = 0;
+        int height1 = 0;
+
         // lists of values for each DRI nutrient
         List<string> nutNames = new List<string>();
         List<string> nutDRINames = new List<string>();
@@ -31,13 +40,17 @@ namespace NuMo_Test.Views
         SKColor LIGHTYELLOW = new SKColor(255, 255, 171);
         SKColor BASEBACKGROUND = new SKColor(33, 150, 243);
 
-        // Stopwatch to animate bars
-        Stopwatch stopwatch = new Stopwatch();
-
         public VisualizePage(List<Nutrient> nutrientList)
         {
             InitializeComponent();
-            InitializeDRIs(); 
+            InitializeDRIs();
+
+            ViewItemList = new List<IMyDayViewItem>();
+            var timeArr = new String[] { "Today", "This Week", "This Month" };
+            timePicker.ItemsSource = timeArr;
+            timePicker.SelectedItem = timeArr[0];
+
+            AnimateBar(0, height1, width1, canvas1, new SKPaint());
 
         }
 
@@ -55,13 +68,13 @@ namespace NuMo_Test.Views
             nutDRINames = db.GetDRINames();
 
             //TODO: Remove this, add consumed info
-            nutConsumed.Add(2000);
-            nutConsumed.Add(50);
+            nutConsumed.Add(2500);
+            nutConsumed.Add(130);
 
             foreach (var DRIname in nutDRINames)
             {
                 var DRIthreshholds = db.getDRIThresholds(DRIname);
-                var midDRI = Double.Parse(db.getDRIValue(DRIname));
+                var midDRI = Double.Parse(db.getDRIValue(DRIname)) * daysToLoad;
 
                 DRImed.Add(midDRI);
 
@@ -70,15 +83,23 @@ namespace NuMo_Test.Views
                  * multipliers in DRIPage, so base funtionallity is present here
                  * Will need to get updated upon DRI threshold changes                
                  */               
-                DRIlow.Add(midDRI * .25);
-                DRIhigh.Add(midDRI * 1.25);
+                DRIlow.Add(midDRI * .25 * daysToLoad);
+                DRIhigh.Add(midDRI * 1.25 * daysToLoad);
             }
+        }
+
+        private void SetBaseCanvas(object sender, SKPaintSurfaceEventArgs e)
+        {
+            width1 = e.Info.Width - 60;
+            height1 = e.Info.Height - 30;
+            canvas1 = e.Surface.Canvas;
+            DrawBaseVisual(e);
         }
 
         /* Method to create the underlying empty bar for nutritional visualizations       
          * Called for each base cell of each nutrient
          */
-        private void drawBaseVisual(object sender, SKPaintSurfaceEventArgs e)
+        private void DrawBaseVisual(SKPaintSurfaceEventArgs e)
         {
             SKCanvas canvas = e.Surface.Canvas;
 
@@ -130,16 +151,119 @@ namespace NuMo_Test.Views
             }
         }
 
-        async Task AnimateBar()
+        async Task AnimateBar(int DRIcount, double barHeight, double barWidth, SKCanvas canvas, SKPaint paint)
         {
+            float height = (float) barHeight;
+            float width = (float) barWidth;
+
+            // Stopwatch to animate bars
+            Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             double t = stopwatch.Elapsed.TotalSeconds;
             while (t <= 1)
             {
+                var fill = Math.Sin(Math.PI / 2 * t);
+                var consumed = nutConsumed.ElementAt(DRIcount) / DRImed.ElementAt(DRIcount);
+                double lengthBar = 0; // values should be from 0 to width
 
+                // cases to deturmine the length of the total bar width filled by current consumed nutrients
+                if (consumed <= .25) lengthBar = 4 * consumed * width / 10;
+                else if (consumed <= .625) lengthBar = width / 10 + (consumed - .25) / .375 * 2 * width / 10;
+                else if (consumed <= 1) lengthBar = 3 * width / 10 + (consumed - .625) / .375 * 2 * width / 10;
+                else if (consumed <= 1.125) lengthBar = 5 * width / 10 + (consumed - 1) / .125 * 2 * width / 10;
+                else if (consumed <= 1.25) lengthBar = 7 * width / 10 + (consumed - 1.125) / .125 * 2 * width / 10;
+                else if (consumed <= 2) lengthBar = 9 * width / 10 + (consumed - 1.25) / .75 * width / 10;
+                else lengthBar = width;
+
+                var proportion = lengthBar / width;
+                var currentFill = (float)(fill * proportion);
+
+                if(currentFill <= .1) // less than min DRI consumed
+                {
+                    paint.Color = Color.Red.ToSKColor();
+                    canvas.DrawRect(new SKRect(30f, 15f,  currentFill*width+30f, height + 15f), paint);
+                }
+                else if(currentFill <= .3) // less than half way from min DRI to DRI
+                {
+                    paint.Color = Color.Red.ToSKColor();
+                    canvas.DrawRect(new SKRect(30, 15, (width / 10) + 25f + 30, height + 15), paint);
+
+                    paint.Color = Color.Yellow.ToSKColor();
+                    canvas.DrawRect(new SKRect(width / 10 + 30f, 15f, currentFill * width + 30f, height + 15f), paint);
+                }
+                else if (currentFill <= .5) // less than DRI
+                {
+                    paint.Color = Color.Yellow.ToSKColor();
+                    canvas.DrawRect(new SKRect((width / 10) + 30, 15, (width / 10) * 3 + 30, height + 15), paint);
+
+                    paint.Color = Color.Green.ToSKColor();
+                    canvas.DrawRect(new SKRect(3 * width / 10 + 30f, 15f, currentFill * width + 30f, height + 15f), paint);
+                }
+                else if (currentFill <= .7) // less than half way from DRI to max DRI 
+                {
+                    paint.Color = Color.Green.ToSKColor();
+                    canvas.DrawRect(new SKRect(3 * width / 10 + 30f, 15f, 5 * width / 10 + 30f, height + 15f), paint);
+
+                    paint.Color = Color.Green.ToSKColor();
+                    canvas.DrawRect(new SKRect(5 * width / 10 + 30f, 15f, currentFill * width + 30f, height + 15f), paint);
+                }
+                else if (currentFill <= .9) // less than max DRI
+                {
+                    paint.Color = Color.Green.ToSKColor();
+                    canvas.DrawRect(new SKRect(5 * width / 10 + 30f, 15f, 7 * width / 10 + 30f, height + 15f), paint);
+
+                    paint.Color = Color.Yellow.ToSKColor();
+                    canvas.DrawRect(new SKRect(7 * width / 10 + 30f, 15f, currentFill * width + 30f, height + 15f), paint);
+                }
+                else if (currentFill < 1) // less than twice DRI
+                {
+                    paint.Color = Color.Yellow.ToSKColor();
+                    canvas.DrawRect(new SKRect(7 * width / 10 + 30f, 15f, 9 * width / 10 + 30f, height + 15f), paint);
+
+                    paint.Color = Color.Red.ToSKColor();
+                    canvas.DrawRect(new SKRect(9 * width / 10 + 30f, 15f, currentFill * width + 30f, height + 15f), paint);
+                }
+                else // above twice DRI
+                {
+                    paint.Color = Color.Red.ToSKColor();
+                    canvas.DrawRect(9 * width / 10 + 30f, 15f, width + 30f, height + 15f, paint);
+                    canvas.DrawRoundRect(width-15f, 15f, 30f, height+15f, 15f, 15f, paint);
+                }
+
+                t = stopwatch.Elapsed.TotalSeconds;
+                Task.Delay(16).Wait();
+                await Task.Delay(0);
             }
+
             stopwatch.Stop();
 
         }
+
+        //Allow user to update the current date
+        void dateClicked(object sender, DateChangedEventArgs e)
+        {
+            date = e.NewDate;
+            this.OnAppearing();
+        }
+
+        //Allow user to update their choice of time range
+        void OnTimeLengthChoiceChanged(object sender, EventArgs e)
+        {
+            //this.Title = timeLengthChoice.Items.ElementAt(timeLengthChoice.SelectedIndex);
+            if ((String)timePicker.SelectedItem == "Today")
+            {
+                daysToLoad = 1;
+            }
+            else if ((String)timePicker.SelectedItem == "This Week")
+            {
+                daysToLoad = 7;
+            }
+            else if ((String)timePicker.SelectedItem == "This Month")
+            {
+                daysToLoad = 30;
+            }
+            this.OnAppearing();
+        }
+
     }
 }

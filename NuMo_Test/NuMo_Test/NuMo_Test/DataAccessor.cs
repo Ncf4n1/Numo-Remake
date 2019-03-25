@@ -383,7 +383,7 @@ namespace NuMo_Test
         /* method to convert the DRI nutrient name to a readable name
          * returns a string that is capitalized and has spaces between words
          * used to help the GetNutNames function in DataAccessor
-         */
+         */ 
         private String DRIToName(String driString)
         {
             var nameString = driString.Split('_')[1];
@@ -401,7 +401,8 @@ namespace NuMo_Test
             }
 
             charList[0] = Char.ToUpper(charList[0]);
-            return charList.ToString();
+            string returnString = new string(charList.ToArray());
+            return returnString;
         }
 
         //save hydration log
@@ -467,6 +468,7 @@ namespace NuMo_Test
             else
                 return "";
         }
+
         //Delete an entry in the picture table
         public void deletePicture(String picDate, String picNum)
         {

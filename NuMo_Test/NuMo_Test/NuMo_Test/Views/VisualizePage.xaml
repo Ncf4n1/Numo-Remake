@@ -11,14 +11,16 @@
     </ContentPage.BindingContext>
     
     <StackLayout Orientation="Vertical" >
+    
+        <DatePicker x:Name="datePicker" MinimumDate="01/01/1970" Format="dddd, MMMM d" DateSelected="dateClicked"/>
 
-        <Label Text="Calories"/>
-        <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="drawBaseVisual" HorizontalOptions="Fill">        
-        </views:SKCanvasView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Picker x:Name="timePicker" Title="Choose Display Time Period"/>
+            </StackLayout>
         
-        <Label Text="Protein"/>
-        <views:SKCanvasView x:Name="ProteinBarCanvas" PaintSurface="drawBaseVisual" HorizontalOptions="Fill">        
-        </views:SKCanvasView>
+        <Label Text="Calories"/>
+        <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="SetBaseCanvas" HorizontalOptions="Fill"/>                
+        
     </StackLayout>
     <ContentPage.Resources>
         <ResourceDictionary>
