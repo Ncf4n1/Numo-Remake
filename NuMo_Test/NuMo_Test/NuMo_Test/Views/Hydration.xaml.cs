@@ -89,7 +89,6 @@ namespace NuMo_Test.Views
             db.saveHydralog(key, val + ""); //update the data entry
             switch (numberOfDrinks){
                 case 0:
-                    //waterLevel = new Image { Source = "water.jpg" };
                     waterLevel.Source = "NoWater.png";
                     break;
                 case 1:

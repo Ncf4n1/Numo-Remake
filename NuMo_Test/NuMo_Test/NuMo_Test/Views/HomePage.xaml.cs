@@ -12,6 +12,7 @@ using NuMo_Test.Views;
 using NuMo_Test.ViewModels;
 using NuMo_Test.ItemViews;
 using NuMo_Test.DatabaseItems;
+using Plugin.LocalNotifications;
 
 namespace NuMo_Test.Views
 {
@@ -52,6 +53,19 @@ namespace NuMo_Test.Views
             //setting the values of the calendar
             //timeLengthChoice.SelectedIndex = 0;
             date = datePicker.Date;
+
+            DataAccessor db = DataAccessor.getDataAccessor();
+            String oldPicDates = db.getPreviousWeekPics(date);
+            if (!oldPicDates.Equals(""))
+            {
+                //Notify in 24 hours if food is found not put in
+                CrossLocalNotifications.Current.Show("Reminder Photos Found!", "For \n" + oldPicDates + "Don't forget to delete pictures from Reminders once you enter them into daily report!",102,date.AddDays(1));
+            }
+            else
+            {
+                //Cancel current notification if no food
+                CrossLocalNotifications.Current.Cancel(102);
+            }
         }
 
         //Set the profile picture, default to logo if one does not exist.

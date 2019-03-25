@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.IO;
 
 
 /* Camera page for uploading or taking pictures to save as reminders
@@ -184,6 +185,12 @@ namespace NuMo_Test.Views
             {
                 dbPicPath = db.getPicReminder(formattedDate, i + "");
                 pPath = dbPicPath;
+                //make sure file still exists (incase user deletes album)
+                if (!File.Exists(dbPicPath))
+                {
+                    db.deletePicture(formattedDate, i + "");
+                    dbPicPath = "";
+                }
                 switch (i)
                 {
                     //changes image placement depending on counter
