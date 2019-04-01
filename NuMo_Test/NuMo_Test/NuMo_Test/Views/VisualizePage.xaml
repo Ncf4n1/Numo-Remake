@@ -19,9 +19,10 @@
             </StackLayout>
         
         <Label Text="Calories"/>
-        <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="SetBaseCanvas" HorizontalOptions="Fill"/>                
-        
+        <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="OnVisualizePaintSurface" HorizontalOptions="Fill"/>                
+            
     </StackLayout>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Page Level Resources: Compatible with Xamarin Live Player -->

@@ -356,7 +356,19 @@ namespace NuMo_Test
          * return the names of nutrients, starting with "dri_" and ending with the camel case name
          */
         public List<String> GetDRINames()
-        { 
+        {
+            List<string> driNames = new List<string>();
+            String[] nutrientNames = {"dri_protein", "dri_totalCarbs", "dri_calories", "dri_sugar", "dri_dietaryFiber", "dri_calcium", "dri_iron", "dri_magnesium", "dri_phosphorus",
+                 "dri_potassium", "dri_sodium", "dri_zinc", "dri_copper", "dri_manganese", "dri_selenium", "dri_vitaminA",
+                 "dri_vitaminE", "dri_vitaminC", "dri_thiamin", "dri_riboflavin", "dri_niacin", "dri_pantothenicAcid", "dri_vitaminB6",
+                      "dri_folate", "dri_vitaminB12", "dri_vitaminK" };
+            foreach (String str in nutrientNames)
+            {
+                driNames.Add(str);
+            }
+
+            return driNames;
+
             // String array of macronutrient names
             String[] macroNutStrings = { "dri_calories", "dri_totalCarbs", "dri_dietaryFiber", "dri_sugar", "dri_netCarbs", "dri_protein" };
             // String array of macronutrient names

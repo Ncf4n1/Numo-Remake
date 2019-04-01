@@ -240,6 +240,8 @@ namespace NuMo_Test.Views
             UpdateMyDayPicture();
             base.OnAppearing();
             OnItemsClicked();
+            nutrientToggle.IsToggled = false;
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:NuMo_Test.MyDayPageHelpers"
@@ -22,9 +22,9 @@
             <DatePicker x:Name="datePicker" MinimumDate="01/01/1970" Format="dddd, MMMM d" DateSelected="dateClicked"/>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                <Picker x:Name="timePicker" Title="Choose Display Time Period"/>
+                <Picker x:Name="timePicker" Title="Choose Display Time Period" SelectedIndexChanged="OnTimeLengthChoiceChanged"/>
                 <Label Text="View Nutrients" TextColor="#00CED1" Margin="15, 0, 0, 0"/>
-                <Switch IsToggled="False" Toggled="viewToggle"/>
+                <Switch x:Name="nutrientToggle" IsToggled="False" Toggled="viewToggle"/>
             </StackLayout>
             
             <ListView x:Name="listView">

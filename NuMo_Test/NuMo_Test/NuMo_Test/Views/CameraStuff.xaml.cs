@@ -41,7 +41,7 @@ namespace NuMo_Test.Views
         {
             // If the take picure button is clicked, check if a camera is supported and use it if so
             await CrossMedia.Current.Initialize();
-            getPermissions();
+            //getPermissions();
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
                 await DisplayAlert("No Camera", ":( No camera available.", "OK");
