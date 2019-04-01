@@ -62,6 +62,8 @@ namespace NuMo_Test.Views
          */
         private void InitializeDRIs()
         {
+            ResetDRIs();
+
             var db = DataAccessor.getDataAccessor();
 
             // initalize DRI and readable names
@@ -84,69 +86,27 @@ namespace NuMo_Test.Views
                 DRIhigh.Add(midDRI * 1.25 * daysToLoad);
             }
 
-            //TODO: Unify order of Nutrients
             foreach (var item in GetNutrients())
             {
                 nutConsumed.Add(item.quantity);
             }
+
+            var caloriesConsumed = nutConsumed.ElementAt(2);
+            var caloriesDRI = DRImed.ElementAt(2);
+            caloriesCounter.Text = caloriesConsumed.ToString("F0") + " / " + caloriesDRI.ToString();
         }
 
-        /* Method to create the underlying empty bar for nutritional visualizations       
-         * Called for each base cell of each nutrient
-         */
-        private void DrawBaseVisual(SKPaintSurfaceEventArgs e)
+        private void ResetDRIs()
         {
-            SKCanvas canvas = e.Surface.Canvas;
-
-            using (SKPaint paint = new SKPaint())
-            {
-                canvas.Clear(BASEBACKGROUND);
-
-                var HORIZONTALPADDING = 30f;
-                var VERTICALPADDING = 15f;
-
-                var width = e.Info.Width - 2*HORIZONTALPADDING;
-                var height = e.Info.Height - 2*VERTICALPADDING;
-
-                // The left rounded edge of the nutrition visual
-                // Starts Red to indicate that it could fill up
-                SKRoundRect firstRound = new SKRoundRect(new SKRect(HORIZONTALPADDING-15f, VERTICALPADDING, HORIZONTALPADDING+15f, height + VERTICALPADDING), 15f, 15f);
-                paint.Color = Color.Red.ToSKColor();
-                canvas.DrawRoundRect(firstRound, paint);
-
-                // The right rounded edge
-                SKRoundRect secondRound = new SKRoundRect(new SKRect(width + 15f, VERTICALPADDING, width + 45f, height + VERTICALPADDING), 15f, 15f);
-                paint.Color = LIGHTRED;
-                canvas.DrawRoundRect(secondRound, paint);
-
-                // Rectangle for consumed DRI 0 tp Min Threshold
-                SKRect firstRect = new SKRect(HORIZONTALPADDING, VERTICALPADDING, (width / 10) + HORIZONTALPADDING, height + VERTICALPADDING);
-                paint.Color = LIGHTRED;
-                canvas.DrawRect(firstRect, paint);
-
-                // Rectangle for consumed DRI from Min Threshold to half way between Min and DRI
-                SKRect secRect = new SKRect((width / 10) + HORIZONTALPADDING, VERTICALPADDING, (width / 10) * 3 + HORIZONTALPADDING, height + VERTICALPADDING);
-                paint.Color = LIGHTYELLOW;
-                canvas.DrawRect(secRect, paint);
-
-                // Rectangle for consumed DRI from 
-                // half way between low thresh and DRI to half way from DRI to max threshhold
-                SKRect thirdRect = new SKRect((width / 10) * 3 + HORIZONTALPADDING, VERTICALPADDING, (width / 10) * 7 + HORIZONTALPADDING, height + VERTICALPADDING);
-                paint.Color = LIGHTGREEN;
-                canvas.DrawRect(thirdRect, paint);
-
-                // Rectangle for consumed DRI from 
-                // halfway between DRI and max threshhold to max threshold
-                SKRect fourRect = new SKRect((width / 10) * 7 + HORIZONTALPADDING, VERTICALPADDING, (width / 10) * 9 + HORIZONTALPADDING, height + VERTICALPADDING);
-                paint.Color = LIGHTYELLOW;
-                canvas.DrawRect(fourRect, paint);
-
-                // Rectangle for consumed DRI from max threshold to twice the regular DRI
-                SKRect fiveRect = new SKRect(((width / 10) * 9) + HORIZONTALPADDING, VERTICALPADDING, width + HORIZONTALPADDING, height + VERTICALPADDING);
-                paint.Color = LIGHTRED;
-                canvas.DrawRect(fiveRect, paint);
-
-            }
+            nutNames.Clear();
+            nutDRINames.Clear();
+            DRIlow.Clear();
+            DRImed.Clear();
+            DRIhigh.Clear();
+            nutConsumed.Clear();
+            DRIlimit.Clear();
+            displayNut.Clear();
+            visualSKCanvases.Clear();
         }
 
         private List<Nutrient> GetNutrients()
@@ -194,15 +154,16 @@ namespace NuMo_Test.Views
             this.OnAppearing();
         }
 
-        //TODO: Implement animation on appearing
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
             InitializeDRIs();
             pageIsActive = true;
+
+            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             AnimateBar();
-            //AnimationLoop();
+            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         protected override void OnDisappearing()
@@ -211,13 +172,82 @@ namespace NuMo_Test.Views
             pageIsActive = false;
         }
 
+
+        /* Method to create the underlying empty bar for nutritional visualizations       
+         * Called for each base cell of each nutrient
+         */
+        private void DrawBaseVisual(SKPaintSurfaceEventArgs e)
+        {
+            SKCanvas canvas = e.Surface.Canvas;
+
+            using (SKPaint paint = new SKPaint())
+            {
+                canvas.Clear(BASEBACKGROUND);
+
+                var HORIZONTALPADDING = 30f;
+                var VERTICALPADDING = 15f;
+
+                var width = e.Info.Width - 2 * HORIZONTALPADDING;
+                var height = e.Info.Height - 2 * VERTICALPADDING;
+
+                // The left rounded edge of the nutrition visual
+                // Starts Red to indicate that it could fill up
+                SKRoundRect firstRound = new SKRoundRect(new SKRect(HORIZONTALPADDING - 15f, VERTICALPADDING, HORIZONTALPADDING + 15f, height + VERTICALPADDING), 15f, 15f);
+                paint.Color = Color.Red.ToSKColor();
+                canvas.DrawRoundRect(firstRound, paint);
+
+                // The right rounded edge
+                SKRoundRect secondRound = new SKRoundRect(new SKRect(width + 15f, VERTICALPADDING, width + 45f, height + VERTICALPADDING), 15f, 15f);
+                paint.Color = LIGHTRED;
+                canvas.DrawRoundRect(secondRound, paint);
+
+                // Rectangle for consumed DRI 0 tp Min Threshold
+                SKRect firstRect = new SKRect(HORIZONTALPADDING, VERTICALPADDING, (width / 10) + HORIZONTALPADDING, height + VERTICALPADDING);
+                paint.Color = LIGHTRED;
+                canvas.DrawRect(firstRect, paint);
+
+                // Rectangle for consumed DRI from Min Threshold to half way between Min and DRI
+                SKRect secRect = new SKRect((width / 10) + HORIZONTALPADDING, VERTICALPADDING, (width / 10) * 3 + HORIZONTALPADDING, height + VERTICALPADDING);
+                paint.Color = LIGHTYELLOW;
+                canvas.DrawRect(secRect, paint);
+
+                // Rectangle for consumed DRI from 
+                // half way between low thresh and DRI to half way from DRI to max threshhold
+                SKRect thirdRect = new SKRect((width / 10) * 3 + HORIZONTALPADDING, VERTICALPADDING, (width / 10) * 7 + HORIZONTALPADDING, height + VERTICALPADDING);
+                paint.Color = LIGHTGREEN;
+                canvas.DrawRect(thirdRect, paint);
+
+                // Rectangle for consumed DRI from 
+                // halfway between DRI and max threshhold to max threshold
+                SKRect fourRect = new SKRect((width / 10) * 7 + HORIZONTALPADDING, VERTICALPADDING, (width / 10) * 9 + HORIZONTALPADDING, height + VERTICALPADDING);
+                paint.Color = LIGHTYELLOW;
+                canvas.DrawRect(fourRect, paint);
+
+                // Rectangle for consumed DRI from max threshold to twice the regular DRI
+                SKRect fiveRect = new SKRect(((width / 10) * 9) + HORIZONTALPADDING, VERTICALPADDING, width + HORIZONTALPADDING, height + VERTICALPADDING);
+                paint.Color = LIGHTRED;
+                canvas.DrawRect(fiveRect, paint);
+
+            }
+        }
+
         async Task AnimateBar()
         {
+
+            double animationTime = 2.5; // Seconds over which the animation takes place
+            double fps = 30; // Frames per second
+
+            if (stopwatch.IsRunning) // If animations are already runningff
+            {
+                pageIsActive = false;
+                stopwatch.Stop();
+                await Task.Delay(TimeSpan.FromSeconds(1.0 / fps));
+                pageIsActive = true;
+            }
+
             stopwatch.Start();
             double startTime = stopwatch.Elapsed.TotalSeconds;
             double elapsedTime = stopwatch.Elapsed.TotalSeconds - startTime;
-
-            double animationTime = 3;
 
             while (pageIsActive && elapsedTime <= animationTime)
             {
@@ -225,12 +255,15 @@ namespace NuMo_Test.Views
                 fill = Math.Sin(Math.PI / 2 * elapsedTime / animationTime);
                 //TODO: for BarCanvasList, InvalidateSurface
                 CaloriesBarCanvas.InvalidateSurface();
-                await Task.Delay(TimeSpan.FromSeconds(1.0 / 30));
+                await Task.Delay(TimeSpan.FromSeconds(1.0 / fps));
             }
 
             stopwatch.Stop();
         }
 
+        /* Method to create backdrop and draw filled bars for the canvases
+         * Takes in the sender and SKCanvas       
+         */       
         void OnVisualizePaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             DrawBaseVisual(args);

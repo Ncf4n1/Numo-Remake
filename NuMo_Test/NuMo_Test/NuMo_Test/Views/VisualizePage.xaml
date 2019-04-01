@@ -15,10 +15,14 @@
         <DatePicker x:Name="datePicker" MinimumDate="01/01/1970" Format="dddd, MMMM d" DateSelected="dateClicked"/>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                <Picker x:Name="timePicker" Title="Choose Display Time Period"/>
+                <Picker x:Name="timePicker" Title="Choose Display Time Period" SelectedIndexChanged="OnTimeLengthChoiceChanged"/>
             </StackLayout>
+                    
+        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Label Text="Calories:" HorizontalOptions="StartAndExpand"/>
+            <Label x:Name="caloriesCounter" Text="temp" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
         
-        <Label Text="Calories"/>
         <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="OnVisualizePaintSurface" HorizontalOptions="Fill"/>                
             
     </StackLayout>
