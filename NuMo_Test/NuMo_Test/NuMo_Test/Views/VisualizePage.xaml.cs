@@ -25,6 +25,8 @@ namespace NuMo_Test.Views
 
         int daysToLoad = 1;
 
+        int NutrientDisplayCounter = 0;
+
         // lists of values for each DRI nutrient
         List<string> nutNames = new List<string>();
         List<string> nutDRINames = new List<string>();
@@ -32,10 +34,9 @@ namespace NuMo_Test.Views
         List<double> DRImed = new List<double>();
         List<double> DRIhigh = new List<double>();
         List<double> nutConsumed = new List<double>();
-        List<bool> DRIlimit = new List<bool>(); // true if the nutrient is harmless beyond DRI
-        List<bool> displayNut = new List<bool>(); // which nutrients should be displayed
-
-        List<SKCanvas> visualSKCanvases = new List<SKCanvas>(); // the list of SKCanvases to draw upon
+        List<bool> DRIlimit = new List<bool>(); // true if the nutrient is harmless beyond DRI // unset, unused
+        List<bool> displayNut = new List<bool> (); // which nutrients should be displayed  // unset, unused
+        List<int> canvasHashValues = new List<int>(); // list of hash values to identify canvases
 
         // light shades used for unfilled visualize bar drawings
         SKColor LIGHTRED = new SKColor(255, 181, 181);
@@ -91,9 +92,20 @@ namespace NuMo_Test.Views
                 nutConsumed.Add(item.quantity);
             }
 
+            // Calories text set
             var caloriesConsumed = nutConsumed.ElementAt(2);
             var caloriesDRI = DRImed.ElementAt(2);
-            caloriesCounter.Text = caloriesConsumed.ToString("F0") + " / " + caloriesDRI.ToString();
+            CaloriesCounter.Text = "Consumed " + caloriesConsumed.ToString("F0") + " out of your recomended " + caloriesDRI.ToString() + " "+ nutNames.ElementAt(2);
+
+            // Protein text set
+            var proteinConsumed = nutConsumed.ElementAt(0);
+            var proteinDRI = DRImed.ElementAt(0);
+            ProteinCounter.Text = "Consumed " + proteinConsumed.ToString("F0") + " out of your recomended " + proteinDRI.ToString() + " " + nutNames.ElementAt(0);
+
+            // Sugar text set
+            var sugarConsumed = nutConsumed.ElementAt(3);
+            var sugarDRI = DRImed.ElementAt(3);
+            SugarCounter.Text = "Consumed " + sugarConsumed.ToString("F0") + " out of your recomended " + sugarDRI.ToString() + " " + nutNames.ElementAt(3);
         }
 
         private void ResetDRIs()
@@ -105,8 +117,6 @@ namespace NuMo_Test.Views
             DRIhigh.Clear();
             nutConsumed.Clear();
             DRIlimit.Clear();
-            displayNut.Clear();
-            visualSKCanvases.Clear();
         }
 
         private List<Nutrient> GetNutrients()
@@ -243,6 +253,7 @@ namespace NuMo_Test.Views
                 stopwatch.Stop();
                 await Task.Delay(TimeSpan.FromSeconds(1.0 / fps));
                 pageIsActive = true;
+                NutrientDisplayCounter = 0;
             }
 
             stopwatch.Start();
@@ -255,28 +266,35 @@ namespace NuMo_Test.Views
                 fill = Math.Sin(Math.PI / 2 * elapsedTime / animationTime);
                 //TODO: for BarCanvasList, InvalidateSurface
                 CaloriesBarCanvas.InvalidateSurface();
+                ProteinBarCanvas.InvalidateSurface();
+                SugarBarCanvas.InvalidateSurface();
                 await Task.Delay(TimeSpan.FromSeconds(1.0 / fps));
             }
 
             stopwatch.Stop();
         }
 
+        // helper methods to draw the different DRI bars
+        void OnVisualizePaintSurfaceCalories(object sender, SKPaintSurfaceEventArgs args){ OnVisualizePaintSurface(sender, args, "dri_calories"); }
+        void OnVisualizePaintSurfaceProtein(object sender, SKPaintSurfaceEventArgs args) { OnVisualizePaintSurface(sender, args, "dri_protein"); }
+        void OnVisualizePaintSurfaceSugar(object sender, SKPaintSurfaceEventArgs args) { OnVisualizePaintSurface(sender, args, "dri_sugar"); }
+
         /* Method to create backdrop and draw filled bars for the canvases
          * Takes in the sender and SKCanvas       
-         */       
-        void OnVisualizePaintSurface(object sender, SKPaintSurfaceEventArgs args)
+         */
+        void OnVisualizePaintSurface(object sender, SKPaintSurfaceEventArgs args, string dri)
         {
             DrawBaseVisual(args);
-            OnVisualizeAnimateBar(args);
+            OnVisualizeAnimateBar(args, dri);
         }
 
-        void OnVisualizeAnimateBar(SKPaintSurfaceEventArgs e)
+        void OnVisualizeAnimateBar(SKPaintSurfaceEventArgs e, string dri)
         {
             var width = e.Info.Width - 60;
             var height = e.Info.Height - 30;
             var canvas = e.Surface.Canvas;
 
-            int DRIcount = nutDRINames.IndexOf("dri_calories");
+            int DRIcount = nutDRINames.IndexOf(dri);
 
             using (SKPaint paint = new SKPaint())
             {

@@ -18,13 +18,18 @@
                 <Picker x:Name="timePicker" Title="Choose Display Time Period" SelectedIndexChanged="OnTimeLengthChoiceChanged"/>
             </StackLayout>
                     
-        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Label Text="Calories:" HorizontalOptions="StartAndExpand"/>
-            <Label x:Name="caloriesCounter" Text="temp" HorizontalOptions="EndAndExpand"/>
-        </StackLayout>
-        
-        <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="OnVisualizePaintSurface" HorizontalOptions="Fill"/>                
+        <Label Text="Calories:" HorizontalOptions="StartAndExpand"/>
+        <Label x:Name="CaloriesCounter" Text="temp" HorizontalOptions="CenterAndExpand" FontSize="Small"/>
+        <views:SKCanvasView x:Name="CaloriesBarCanvas" PaintSurface="OnVisualizePaintSurfaceCalories" HorizontalOptions="Fill"/>                
             
+        <Label Text="Protein:" HorizontalOptions="StartAndExpand"/>
+        <Label x:Name="ProteinCounter" Text="temp" HorizontalOptions="CenterAndExpand" FontSize="Small"/>
+        <views:SKCanvasView x:Name="ProteinBarCanvas" PaintSurface="OnVisualizePaintSurfaceProtein" HorizontalOptions="Fill"/>       
+    
+        <Label Text="Sugar:" HorizontalOptions="StartAndExpand"/>
+        <Label x:Name="SugarCounter" Text="temp" HorizontalOptions="CenterAndExpand" FontSize="Small"/>
+        <views:SKCanvasView x:Name="SugarBarCanvas" PaintSurface="OnVisualizePaintSurfaceSugar" HorizontalOptions="Fill"/>       
+    
     </StackLayout>
     
     <ContentPage.Resources>

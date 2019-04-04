@@ -369,27 +369,6 @@ namespace NuMo_Test
 
             return driNames;
 
-            // String array of macronutrient names
-            String[] macroNutStrings = { "dri_calories", "dri_totalCarbs", "dri_dietaryFiber", "dri_sugar", "dri_netCarbs", "dri_protein" };
-            // String array of macronutrient names
-            String[] vitNutStrings = { "dri_vitaminA", "dri_vitaminC", "dri_vitaminD", "dri_vitaminE", "dri_vitaminK", "dri_thiamin", "dri_riboflavin", "dri_niacin", "dri_vitaminB6", "dri_folate", "dri_vitaminB12", "dri_pantothenicAcid" };
-            // String array of macronutrient names
-            String[] minNutStrings = { "dri_calcium", "dri_iron", "dri_magnesium", "dri_phosphorus", "dri_potassium", "dri_sodium", "dri_zinc", "dri_copper", "dri_manganese", "dri_selenium" };
-
-            List<String> nutNameList = new List<string>();
-            foreach (String str in macroNutStrings) {
-                nutNameList.Add( str );
-            }
-            foreach (String str in vitNutStrings)
-            {
-                nutNameList.Add( str );
-            }
-            foreach (String str in minNutStrings)
-            {
-                nutNameList.Add( str );
-            }
-            return nutNameList;
-
         }
 
         /* method to convert the DRI nutrient name to a readable name
