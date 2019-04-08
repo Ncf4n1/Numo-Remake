@@ -112,6 +112,10 @@ namespace NuMo_Test.Views
             var sugarConsumed = nutConsumed.ElementAt(3);
             var sugarDRI = DRImed.ElementAt(3);
             SugarCounter.Text = "Consumed " + sugarConsumed.ToString("F0") + "(g) out of your recomended " + sugarDRI.ToString() + "(g) " + nutNames.ElementAt(3);
+
+            // Omega text set
+            var omegaConsumed = nutConsumed.ElementAt(28);
+            OmegaCounter.Text = "Your ratio is " + omegaConsumed.ToString("F1") + ", it is recommended to be at or below 4.0";
         }
 
         private void ResetDRIs()
@@ -460,21 +464,24 @@ namespace NuMo_Test.Views
                 paint.Color = CIRCLEDARK;
                 canvas.DrawCircle(centerPoint, (float)(radius * 0.2), paint);
 
-                // arrow calculations
-                //SKPath ArrowPath = CalculateArrowPath(height, width);
+                //arrow calculations
+                SKPath ArrowPath = CalculateArrowPath(height, width);
 
-                //// arrow drawing
-                //paint.Color = ARROWSHADE;
-                //canvas.DrawPath(ArrowPath, paint);
+                // arrow drawing
+                paint.Color = ARROWSHADE;
+                canvas.DrawPath(ArrowPath, paint);
             }
 
         }
 
         private SKPath CalculateArrowPath(double height, double width)
         {
-            SKPath arrowPath = new SKPath();
+            SKPath ArrowPath = new SKPath();
+            SKPoint[] points = new SKPoint[12];
 
             double radius = Math.Min(height, width) / 2;
+            float centerX = (float)(width / 2);
+            float centerY = (float)(height / 2);
 
             // omega 6 to 3 ration from nutrients consumed
             double ratioO63 = nutConsumed.ElementAt(28);
@@ -482,13 +489,61 @@ namespace NuMo_Test.Views
             double tipX = 0;
             // calculation for where the tip point of the arrow should be
             if (ratioO63 >= 20) { tipX = width / 2 - 0.8 * radius; }
-            else if (ratioO63 <= 2) { tipX = width / 2; }
             else { tipX = width / 2 - 0.8 * radius * ratioO63 / 20; }
 
 
-            SKPoint tipPoint = new SKPoint( (float)tipX, (float)height/2 );
+            SKPoint tipPoint = new SKPoint( (float)tipX, centerY);
+            points[0] = tipPoint;
 
-            return arrowPath;
+            // arrowhead left and right points
+            var headWidth = radius * 0.1;
+            var headHeight = radius * 0.2;
+            SKPoint leftHeadPoint = new SKPoint( (float)(tipX - headWidth), (float)(centerY - headHeight) );
+            points[1] = leftHeadPoint;
+
+            SKPoint rightHeadPoint = new SKPoint((float)(tipX + headWidth), (float)(centerY - headHeight));
+            points[11] = rightHeadPoint;
+
+            // Arrow Shaft base points
+            var shaftWidth = radius * 0.04;
+            var shaftBaseHeight = radius * 0.2;
+            SKPoint leftShaftBasePoint = new SKPoint((float)(tipX - shaftWidth), (float)(centerY - shaftBaseHeight));
+            points[2] = leftShaftBasePoint;
+
+            SKPoint rightShaftBasePoint = new SKPoint((float)(tipX + shaftWidth), (float)(centerY - shaftBaseHeight));
+            points[10] = rightShaftBasePoint;
+
+            // Arrow Shaft back points
+            var shaftBackHeight = radius * 0.6;
+            SKPoint leftShaftBackPoint = new SKPoint((float)(tipX - shaftWidth), (float)(centerY - shaftBackHeight));
+            points[3] = leftShaftBackPoint;
+
+            SKPoint rightShaftBackPoint = new SKPoint((float)(tipX + shaftWidth), (float)(centerY - shaftBackHeight));
+            points[9] = rightShaftBackPoint;
+
+            // Arrow Feathers bottom points
+            var featherBottomHeight = radius * 0.7;
+            var featherWidth = radius * 0.075;
+            SKPoint leftFeatherBottomPoint = new SKPoint((float)(tipX - featherWidth), (float)(centerY - featherBottomHeight));
+            points[4] = leftFeatherBottomPoint;
+
+            SKPoint rightFeatherBottomPoint = new SKPoint((float)(tipX + featherWidth), (float)(centerY - featherBottomHeight));
+            points[8] = rightFeatherBottomPoint;
+
+            // Arrow Feathers top point
+            var feathertopHeight = radius * 0.9;
+            SKPoint leftFeatherTopPoint = new SKPoint((float)(tipX - featherWidth), (float)(centerY - feathertopHeight));
+            points[5] = leftFeatherTopPoint;
+
+            SKPoint rightFeatherTopPoint = new SKPoint((float)(tipX + featherWidth), (float)(centerY - feathertopHeight));
+            points[7] = rightFeatherTopPoint;
+
+            // Central back point
+            SKPoint centralBackPoint = new SKPoint( (float)tipX, (float)(centerY - radius * 0.75));
+            points[6] = centralBackPoint;
+
+            ArrowPath.AddPoly(points, true);
+            return ArrowPath;
         }
     }
 }
