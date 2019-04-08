@@ -91,7 +91,7 @@ namespace NuMo_Test.Views
             // conditional check to add in zero values if nothing has been consumed that day 
             if (nutConsumed.Count() == 0)
             {
-                for (var i = 0; i < 28; i++)
+                for (var i = 0; i < 29; i++)
                 {
                     nutConsumed.Add(0);
                 }
@@ -178,6 +178,8 @@ namespace NuMo_Test.Views
             base.OnAppearing();
 
             InitializeDRIs();
+            OmegaTargetCanvas.InvalidateSurface();
+
             pageIsActive = true;
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -539,7 +541,7 @@ namespace NuMo_Test.Views
             points[7] = rightFeatherTopPoint;
 
             // Central back point
-            SKPoint centralBackPoint = new SKPoint( (float)tipX, (float)(centerY - radius * 0.75));
+            SKPoint centralBackPoint = new SKPoint( (float)tipX, (float)(centerY - radius * 0.70));
             points[6] = centralBackPoint;
 
             ArrowPath.AddPoly(points, true);
