@@ -45,7 +45,7 @@ namespace NuMo_Test.Views
                         MenuPages.Add(id, new NavigationPage(new CreateFoodPage()));
                         break;
                     case (int)MenuItemType.Visualize:
-                        MenuPages.Add(id, new NavigationPage(new VisualizePage(getNutrients())));
+                        MenuPages.Add(id, new NavigationPage(new VisualizePage()));
                         break;
                     case (int)MenuItemType.DRI:
                         MenuPages.Add(id, new NavigationPage(new DRIPage()));

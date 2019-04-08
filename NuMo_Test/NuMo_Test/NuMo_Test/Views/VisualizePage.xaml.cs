@@ -23,9 +23,8 @@ namespace NuMo_Test.Views
         bool pageIsActive;
         double fill;
 
+        // inialize the days to visualize to 1
         int daysToLoad = 1;
-
-        int NutrientDisplayCounter = 0;
 
         // lists of values for each DRI nutrient
         List<string> nutNames = new List<string>();
@@ -34,9 +33,6 @@ namespace NuMo_Test.Views
         List<double> DRImed = new List<double>();
         List<double> DRIhigh = new List<double>();
         List<double> nutConsumed = new List<double>();
-        List<bool> DRIlimit = new List<bool>(); // true if the nutrient is harmless beyond DRI // unset, unused
-        List<bool> displayNut = new List<bool> (); // which nutrients should be displayed  // unset, unused
-        List<int> canvasHashValues = new List<int>(); // list of hash values to identify canvases
 
         // light shades used for unfilled visualize bar drawings
         SKColor LIGHTRED = new SKColor(255, 181, 181);
@@ -44,7 +40,7 @@ namespace NuMo_Test.Views
         SKColor LIGHTYELLOW = new SKColor(255, 255, 171);
         SKColor BASEBACKGROUND = new SKColor(33, 150, 243);
 
-        public VisualizePage(List<Nutrient> nutrientList)
+        public VisualizePage()
         {
             InitializeComponent();
 
@@ -82,7 +78,7 @@ namespace NuMo_Test.Views
                  * Current low and high calculations are done with these constant 
                  * multipliers in DRIPage, so base funtionallity is present here
                  * Will need to get updated upon DRI threshold changes                
-                 */               
+                 */
                 DRIlow.Add(midDRI * .25 * daysToLoad);
                 DRIhigh.Add(midDRI * 1.25 * daysToLoad);
             }
@@ -92,20 +88,30 @@ namespace NuMo_Test.Views
                 nutConsumed.Add(item.quantity);
             }
 
+            // conditional check to add in zero values if nothing has been consumed that day 
+            if (nutConsumed.Count() == 0)
+            {
+                for (var i = 0; i < 28; i++)
+                {
+                    nutConsumed.Add(0);
+                }
+            }
+
             // Calories text set
             var caloriesConsumed = nutConsumed.ElementAt(2);
             var caloriesDRI = DRImed.ElementAt(2);
-            CaloriesCounter.Text = "Consumed " + caloriesConsumed.ToString("F0") + " out of your recomended " + caloriesDRI.ToString() + " "+ nutNames.ElementAt(2);
+            CaloriesCounter.Text = "Consumed " + caloriesConsumed.ToString("F0") + " out of your recomended " + caloriesDRI.ToString() + " " + nutNames.ElementAt(2);
+
 
             // Protein text set
             var proteinConsumed = nutConsumed.ElementAt(0);
             var proteinDRI = DRImed.ElementAt(0);
-            ProteinCounter.Text = "Consumed " + proteinConsumed.ToString("F0") + " out of your recomended " + proteinDRI.ToString() + " " + nutNames.ElementAt(0);
+            ProteinCounter.Text = "Consumed " + proteinConsumed.ToString("F0") + "(g) out of your recomended " + proteinDRI.ToString() + "(g) " + nutNames.ElementAt(0);
 
             // Sugar text set
             var sugarConsumed = nutConsumed.ElementAt(3);
             var sugarDRI = DRImed.ElementAt(3);
-            SugarCounter.Text = "Consumed " + sugarConsumed.ToString("F0") + " out of your recomended " + sugarDRI.ToString() + " " + nutNames.ElementAt(3);
+            SugarCounter.Text = "Consumed " + sugarConsumed.ToString("F0") + "(g) out of your recomended " + sugarDRI.ToString() + "(g) " + nutNames.ElementAt(3);
         }
 
         private void ResetDRIs()
@@ -116,7 +122,6 @@ namespace NuMo_Test.Views
             DRImed.Clear();
             DRIhigh.Clear();
             nutConsumed.Clear();
-            DRIlimit.Clear();
         }
 
         private List<Nutrient> GetNutrients()
@@ -130,11 +135,11 @@ namespace NuMo_Test.Views
             }
             var nutrientList = db.getNutrientsFromHistoryList(baseList);
 
-            foreach (var item in nutrientList)
-            {
-                if (item.DisplayName != "Omega6/3 Ratio")
-                    item.quantity /= daysToLoad;
-            }
+            //foreach (var item in nutrientList)
+            //{
+            //    if (item.DisplayName != "Omega6/3 Ratio")
+            //        item.quantity /= daysToLoad;
+            //}
             return nutrientList;
         }
 
@@ -171,9 +176,9 @@ namespace NuMo_Test.Views
             InitializeDRIs();
             pageIsActive = true;
 
-            #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             AnimateBar();
-            #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         protected override void OnDisappearing()
@@ -199,6 +204,10 @@ namespace NuMo_Test.Views
 
                 var width = e.Info.Width - 2 * HORIZONTALPADDING;
                 var height = e.Info.Height - 2 * VERTICALPADDING;
+
+                // The black outline to the visualize bar
+                paint.Color = Color.Black.ToSKColor();
+                canvas.DrawRoundRect(new SKRoundRect(new SKRect(HORIZONTALPADDING - 19, VERTICALPADDING - 4, width + HORIZONTALPADDING + 19, height + VERTICALPADDING + 4), 15f, 15f), paint);
 
                 // The left rounded edge of the nutrition visual
                 // Starts Red to indicate that it could fill up
@@ -253,7 +262,6 @@ namespace NuMo_Test.Views
                 stopwatch.Stop();
                 await Task.Delay(TimeSpan.FromSeconds(1.0 / fps));
                 pageIsActive = true;
-                NutrientDisplayCounter = 0;
             }
 
             stopwatch.Start();
@@ -275,9 +283,10 @@ namespace NuMo_Test.Views
         }
 
         // helper methods to draw the different DRI bars
-        void OnVisualizePaintSurfaceCalories(object sender, SKPaintSurfaceEventArgs args){ OnVisualizePaintSurface(sender, args, "dri_calories"); }
+        void OnVisualizePaintSurfaceCalories(object sender, SKPaintSurfaceEventArgs args) { OnVisualizePaintSurface(sender, args, "dri_calories"); }
         void OnVisualizePaintSurfaceProtein(object sender, SKPaintSurfaceEventArgs args) { OnVisualizePaintSurface(sender, args, "dri_protein"); }
         void OnVisualizePaintSurfaceSugar(object sender, SKPaintSurfaceEventArgs args) { OnVisualizePaintSurface(sender, args, "dri_sugar"); }
+
 
         /* Method to create backdrop and draw filled bars for the canvases
          * Takes in the sender and SKCanvas       
@@ -317,7 +326,7 @@ namespace NuMo_Test.Views
                 var HORIZONTALPADDING = 30f;
 
                 // First red rectangle, representing 0 to minDRI nutrients consumed
-                if (currentFill > 0) 
+                if (currentFill > 0)
                 {
                     paint.Color = Color.Red.ToSKColor();
                     if (currentFill <= .1)
@@ -400,8 +409,86 @@ namespace NuMo_Test.Views
                         canvas.DrawRoundRect(width - VERTICALPADDING, VERTICALPADDING, 30f, height + VERTICALPADDING, VERTICALPADDING, VERTICALPADDING, paint);
                     }
                 }
+
+                paint.Color = Color.Black.ToSKColor();
+                canvas.DrawRect(new SKRect(currentFill * width + HORIZONTALPADDING - 3, VERTICALPADDING, currentFill * width + HORIZONTALPADDING + 3, height + VERTICALPADDING), paint);
+
+                // Vertical lines
+                canvas.DrawRect(new SKRect(width / 2 + HORIZONTALPADDING - 2, VERTICALPADDING, width / 2 + HORIZONTALPADDING + 2, height + VERTICALPADDING), paint);
+                canvas.DrawRect(new SKRect(width * 1 / 10 + HORIZONTALPADDING - 2, VERTICALPADDING, width * 1 / 10 + HORIZONTALPADDING + 2, height + VERTICALPADDING), paint);
+                canvas.DrawRect(new SKRect(width * 3 / 10 + HORIZONTALPADDING - 2, VERTICALPADDING, width * 3 / 10 + HORIZONTALPADDING + 2, height + VERTICALPADDING), paint);
+                canvas.DrawRect(new SKRect(width * 7 / 10 + HORIZONTALPADDING - 2, VERTICALPADDING, width * 7 / 10 + HORIZONTALPADDING + 2, height + VERTICALPADDING), paint);
+                canvas.DrawRect(new SKRect(width * 9 / 10 + HORIZONTALPADDING - 2, VERTICALPADDING, width * 9 / 10 + HORIZONTALPADDING + 2, height + VERTICALPADDING), paint);
+
             }
 
+        }
+
+        void OnVisualizePaintSurfaceOmegas(object sender, SKPaintSurfaceEventArgs args)
+        {
+            SKColor ARROWSHADE = new SKColor(185,220,223);
+            SKColor CIRCLEDARK = new SKColor(72, 88, 88);
+            SKColor CIRCLEBLUE = new SKColor(78, 161, 179);
+            SKColor CIRCLESKY = new SKColor(118, 196, 196);
+
+            SKCanvas canvas = args.Surface.Canvas;
+            var width = args.Info.Width;
+            var height = args.Info.Height;
+    
+            var radius = Math.Min(width, height) / 2;
+
+            using (SKPaint paint = new SKPaint())
+            {
+                canvas.Clear(BASEBACKGROUND);
+
+                // central point for each of the circles
+                var centerPoint = new SKPoint(width / 2, height / 2);
+
+                // outer dark ring of target
+                paint.Color = CIRCLEDARK;
+                canvas.DrawCircle(centerPoint, (float)(radius * 0.8), paint);
+
+                // outer blue ring of target
+                paint.Color = CIRCLEBLUE;
+                canvas.DrawCircle(centerPoint, (float)(radius * 0.6), paint);
+
+                // inner blue ring of target
+                paint.Color = CIRCLESKY;
+                canvas.DrawCircle(centerPoint, (float)(radius * 0.4), paint);
+
+                // inner dark ring of target
+                paint.Color = CIRCLEDARK;
+                canvas.DrawCircle(centerPoint, (float)(radius * 0.2), paint);
+
+                // arrow calculations
+                //SKPath ArrowPath = CalculateArrowPath(height, width);
+
+                //// arrow drawing
+                //paint.Color = ARROWSHADE;
+                //canvas.DrawPath(ArrowPath, paint);
+            }
+
+        }
+
+        private SKPath CalculateArrowPath(double height, double width)
+        {
+            SKPath arrowPath = new SKPath();
+
+            double radius = Math.Min(height, width) / 2;
+
+            // omega 6 to 3 ration from nutrients consumed
+            double ratioO63 = nutConsumed.ElementAt(28);
+
+            double tipX = 0;
+            // calculation for where the tip point of the arrow should be
+            if (ratioO63 >= 20) { tipX = width / 2 - 0.8 * radius; }
+            else if (ratioO63 <= 2) { tipX = width / 2; }
+            else { tipX = width / 2 - 0.8 * radius * ratioO63 / 20; }
+
+
+            SKPoint tipPoint = new SKPoint( (float)tipX, (float)height/2 );
+
+            return arrowPath;
         }
     }
 }

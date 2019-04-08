@@ -359,9 +359,9 @@ namespace NuMo_Test
         {
             List<string> driNames = new List<string>();
             String[] nutrientNames = {"dri_protein", "dri_totalCarbs", "dri_calories", "dri_sugar", "dri_dietaryFiber", "dri_calcium", "dri_iron", "dri_magnesium", "dri_phosphorus",
-                 "dri_potassium", "dri_sodium", "dri_zinc", "dri_copper", "dri_manganese", "dri_selenium", "dri_vitaminA",
-                 "dri_vitaminE", "dri_vitaminC", "dri_thiamin", "dri_riboflavin", "dri_niacin", "dri_pantothenicAcid", "dri_vitaminB6",
-                      "dri_folate", "dri_vitaminB12", "dri_vitaminK" };
+                    "dri_potassium", "dri_sodium", "dri_zinc", "dri_copper", "dri_manganese", "dri_selenium", "dri_vitaminA",
+                    "dri_vitaminE", "dri_vitaminC", "dri_thiamin", "dri_riboflavin", "dri_niacin", "dri_vitaminB6",
+                    "dri_folate", "dri_vitaminB12", "dri_vitaminK", "dri_pantothenicAcid"};
             foreach (String str in nutrientNames)
             {
                 driNames.Add(str);
@@ -382,7 +382,7 @@ namespace NuMo_Test
 
             foreach (char currentChar in nameString.ToArray())
             {
-                if (Char.IsUpper(currentChar))
+                if (Char.IsUpper(currentChar) || Char.IsDigit(currentChar))
                 {
                     charList.Add(' ');
                 }
